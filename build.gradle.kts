@@ -14,6 +14,7 @@ repositories {
 }
 
 val junitVersion = "5.12.1"
+val lombokVersion = "1.18.48"
 
 java {
     toolchain {
@@ -37,6 +38,12 @@ javafx {
 
 dependencies {
     implementation("org.controlsfx:controlsfx:11.2.1")
+
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
