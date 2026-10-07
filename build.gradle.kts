@@ -1,7 +1,6 @@
 plugins {
     java
     application
-    id("org.javamodularity.moduleplugin") version "2.0.1"
     id("org.openjfx.javafxplugin") version "0.1.0"
     id("org.beryx.jlink") version "4.0.2"
 }
@@ -27,8 +26,7 @@ tasks.withType<JavaCompile> {
 }
 
 application {
-    mainModule.set("it.unicam.cs.mpgc.rpg125657.cursedcastles")
-    mainClass.set("it.unicam.cs.mpgc.rpg125657.cursedcastles.HelloApplication")
+    mainClass.set("it.unicam.cs.mpgc.rpg125657.cursedcastles.CursedCastlesApplication")
 }
 
 javafx {
@@ -37,8 +35,6 @@ javafx {
 }
 
 dependencies {
-    implementation("org.controlsfx:controlsfx:11.2.1")
-
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
     testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
@@ -46,6 +42,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.withType<Test> {

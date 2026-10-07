@@ -1,9 +1,14 @@
 package it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento;
 
+import lombok.Getter;
+import lombok.experimental.Accessors;
+
 /** Politica di ricarica che diventa disponibile dopo un numero definito di turni. */
 public final class RicaricaATurni implements Ricarica {
 
     private final int durata;
+    @Getter
+    @Accessors(fluent = true)
     private int turniRimanenti;
 
     public RicaricaATurni(int durata, int attesaIniziale) {
@@ -37,8 +42,4 @@ public final class RicaricaATurni implements Ricarica {
         }
     }
 
-    @Override
-    public int turniRimanenti() {
-        return turniRimanenti;
-    }
 }
