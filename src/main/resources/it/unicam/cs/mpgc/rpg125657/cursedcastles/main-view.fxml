@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="16.0"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.unicam.cs.mpgc.rpg125657.cursedcastles.controller.MenuController">
+    <padding>
+        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
+    </padding>
+    <Label text="Chronicles of the Cursed Castles"/>
+    <Label text="Castelli disponibili"/>
+    <ListView fx:id="elencoCastelli" prefHeight="220.0" prefWidth="420.0"/>
+</VBox>
