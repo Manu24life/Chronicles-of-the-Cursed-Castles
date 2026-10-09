@@ -12,5 +12,8 @@ public interface Ricarica {
 
     void avanzaTurno();
 
+    /** Ripristina la ricarica allo stato previsto all'inizio di un castello. */
+    void reset();
+
     int turniRimanenti();
 }

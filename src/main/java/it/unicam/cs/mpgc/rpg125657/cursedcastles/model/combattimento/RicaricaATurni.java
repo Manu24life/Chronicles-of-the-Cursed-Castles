@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 public final class RicaricaATurni implements Ricarica {
 
     private final int durata;
+    private final int attesaIniziale;
     @Getter
     @Accessors(fluent = true)
     private int turniRimanenti;
@@ -19,6 +20,7 @@ public final class RicaricaATurni implements Ricarica {
             throw new IllegalArgumentException("L'attesa iniziale non può essere negativa");
         }
         this.durata = durata;
+        this.attesaIniziale = attesaIniziale;
         this.turniRimanenti = attesaIniziale;
     }
 
@@ -40,6 +42,11 @@ public final class RicaricaATurni implements Ricarica {
         if (turniRimanenti > 0) {
             turniRimanenti--;
         }
+    }
+
+    @Override
+    public void reset() {
+        turniRimanenti = attesaIniziale;
     }
 
 }

@@ -16,6 +16,11 @@ public final class TempraDelCavaliere extends AbilitaConRicarica {
     }
 
     @Override
+    public boolean richiedeBersaglio() {
+        return false;
+    }
+
+    @Override
     protected RisultatoAzione applica(Eroe utilizzatore, Combattente bersaglio) {
         utilizzatore.applicaBonus(BONUS);
         return new RisultatoAzione(

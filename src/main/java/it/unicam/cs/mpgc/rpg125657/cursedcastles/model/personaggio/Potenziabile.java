@@ -8,4 +8,6 @@ public interface Potenziabile {
     int bonusAttaccoPercentuale();
 
     int bonusDifesaPercentuale();
+
+    void azzeraBonus();
 }
