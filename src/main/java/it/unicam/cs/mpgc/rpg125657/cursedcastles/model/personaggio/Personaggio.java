@@ -38,6 +38,9 @@ public abstract class Personaggio implements Combattente {
         if (puntiVita < 0) {
             throw new IllegalArgumentException("La cura non può essere negativa");
         }
+        if (!isVivo() && puntiVita > 0) {
+            throw new IllegalStateException("La cura non può rianimare un personaggio sconfitto");
+        }
         this.puntiVita = Math.min(statisticheBase.puntiVitaMassimi(), this.puntiVita + puntiVita);
     }
 }

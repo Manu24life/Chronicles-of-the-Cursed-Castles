@@ -8,7 +8,7 @@ public record RisultatoAzione(
         int dannoInflitto,
         int puntiVitaRecuperati,
         String descrizione,
-        CodiceRisultatoAzione codice
+        EsitoAzione codice
 ) {
     public RisultatoAzione(
             boolean riuscita,
@@ -22,8 +22,8 @@ public record RisultatoAzione(
                 puntiVitaRecuperati,
                 descrizione,
                 riuscita
-                        ? CodiceRisultatoAzione.SUCCESSO
-                        : CodiceRisultatoAzione.AZIONE_NON_CONSENTITA
+                        ? EsitoAzione.SUCCESSO
+                        : EsitoAzione.AZIONE_NON_CONSENTITA
         );
     }
 
@@ -36,7 +36,7 @@ public record RisultatoAzione(
         }
         Objects.requireNonNull(descrizione, "La descrizione non può essere null");
         Objects.requireNonNull(codice, "Il codice non può essere null");
-        if (riuscita != (codice == CodiceRisultatoAzione.SUCCESSO)) {
+        if (riuscita != (codice == EsitoAzione.SUCCESSO)) {
             throw new IllegalArgumentException("Il codice deve essere coerente con l'esito");
         }
     }
@@ -51,15 +51,15 @@ public record RisultatoAzione(
                 dannoInflitto,
                 puntiVitaRecuperati,
                 descrizione,
-                CodiceRisultatoAzione.SUCCESSO
+                EsitoAzione.SUCCESSO
         );
     }
 
     public static RisultatoAzione fallimento(
-            CodiceRisultatoAzione codice,
+            EsitoAzione codice,
             String descrizione
     ) {
-        if (codice == CodiceRisultatoAzione.SUCCESSO) {
+        if (codice == EsitoAzione.SUCCESSO) {
             throw new IllegalArgumentException("Un fallimento richiede un codice di errore");
         }
         return new RisultatoAzione(false, 0, 0, descrizione, codice);

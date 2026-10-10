@@ -63,6 +63,11 @@ public abstract class AbilitaConRicarica implements AbilitaEroe {
         ricarica.avanzaTurno();
     }
 
+    @Override
+    public final void reset() {
+        ricarica.reset();
+    }
+
     private RisultatoAzione fallimento(String descrizione) {
         return new RisultatoAzione(false, 0, 0, descrizione);
     }

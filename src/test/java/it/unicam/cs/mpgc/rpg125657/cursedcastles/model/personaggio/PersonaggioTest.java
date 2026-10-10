@@ -3,8 +3,6 @@ package it.unicam.cs.mpgc.rpg125657.cursedcastles.model.personaggio;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.Eroe;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.FabbricaEroiStandard;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.ClassiEroe;
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.abilita.AssorbimentoMagico;
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.RicaricaATurni;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,10 +40,6 @@ class PersonaggioTest {
     }
 
     private Eroe creaMago() {
-        return new FabbricaEroiStandard().crea(
-                "Merlino",
-                ClassiEroe.MAGO,
-                new AssorbimentoMagico(new RicaricaATurni(3, 0))
-        );
+        return new FabbricaEroiStandard().crea("Merlino", ClassiEroe.MAGO);
     }
 }

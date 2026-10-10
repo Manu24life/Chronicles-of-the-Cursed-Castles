@@ -19,10 +19,13 @@ public final class EroeGiocabile extends Personaggio implements Eroe {
     private final AbilitaEroe abilita;
     private final BonusStatistiche bonusStatistiche = new BonusStatistiche();
 
-    public EroeGiocabile(String nome, ClasseEroe classe, AbilitaEroe abilita) {
+    EroeGiocabile(String nome, ClasseEroe classe, AbilitaEroe abilita) {
         super(nome, Objects.requireNonNull(classe, "La classe non può essere null").statistiche());
         this.classe = classe;
         this.abilita = Objects.requireNonNull(abilita, "L'abilità non può essere null");
+        if (!classe.isAbilitaCompatibile(abilita)) {
+            throw new IllegalArgumentException("L'abilità non è compatibile con la classe " + classe.nome());
+        }
     }
 
     @Override
@@ -48,6 +51,11 @@ public final class EroeGiocabile extends Personaggio implements Eroe {
     @Override
     public int bonusDifesaPercentuale() {
         return bonusStatistiche.difesaPercentuale();
+    }
+
+    @Override
+    public void azzeraBonus() {
+        bonusStatistiche.reset();
     }
 
     @Override

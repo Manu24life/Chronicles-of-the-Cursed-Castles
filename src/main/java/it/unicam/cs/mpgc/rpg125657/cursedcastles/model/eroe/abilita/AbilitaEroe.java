@@ -16,4 +16,12 @@ public interface AbilitaEroe {
     int turniRimanenti();
 
     void avanzaTurno();
+
+    /** Ripristina lo stato dell'abilità all'inizio di un nuovo castello. */
+    void reset();
+
+    /** Indica se l'abilità richiede la scelta di un nemico. */
+    default boolean richiedeBersaglio() {
+        return true;
+    }
 }

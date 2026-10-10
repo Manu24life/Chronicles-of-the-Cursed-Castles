@@ -13,4 +13,10 @@ public interface Eroe extends Combattente, Potenziabile {
 
     /** Aggiorna gli stati dipendenti dai turni quando inizia un nuovo turno dell'eroe. */
     void avanzaTurno();
+
+    /** Azzera gli stati che, per regola, non si trasferiscono al castello successivo. */
+    default void preparaNuovoCastello() {
+        azzeraBonus();
+        abilita().reset();
+    }
 }

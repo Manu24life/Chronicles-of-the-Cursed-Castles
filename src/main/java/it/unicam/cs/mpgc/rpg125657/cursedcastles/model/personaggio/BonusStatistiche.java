@@ -38,6 +38,11 @@ public final class BonusStatistiche {
         return difesaPercentuale;
     }
 
+    public void reset() {
+        attaccoPercentuale = 0;
+        difesaPercentuale = 0;
+    }
+
     private int applicaPercentuale(int valoreBase, int percentuale) {
         long valoreCalcolato = Math.round(valoreBase * (100L + percentuale) / 100.0);
         return Math.toIntExact(valoreCalcolato);

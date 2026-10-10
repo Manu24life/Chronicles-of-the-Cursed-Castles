@@ -2,7 +2,6 @@ package it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe;
 
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.RicaricaATurni;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.RisultatoAzione;
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.abilita.AssorbimentoMagico;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.abilita.TempraDelCavaliere;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.mostro.Mostro;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.mostro.TipoMostro;
@@ -19,11 +18,7 @@ class AbilitaEroeTest {
 
     @Test
     void ilMagoInfliggeDannoECuraIlTrentaPercentoDellaVitaMassima() {
-        Eroe mago = fabbricaEroi.crea(
-                "Merlino",
-                ClassiEroe.MAGO,
-                new AssorbimentoMagico(new RicaricaATurni(3, 0))
-        );
+        Eroe mago = fabbricaEroi.crea("Merlino", ClassiEroe.MAGO);
         Mostro bersaglio = creaBersaglio();
         mago.subisciDanno(30);
 
@@ -79,16 +74,8 @@ class AbilitaEroeTest {
 
     @Test
     void eroiDiversiNonCondividonoLoStatoDellaRicarica() {
-        Eroe primo = fabbricaEroi.crea(
-                "Primo",
-                ClassiEroe.MAGO,
-                new AssorbimentoMagico(new RicaricaATurni(3, 0))
-        );
-        Eroe secondo = fabbricaEroi.crea(
-                "Secondo",
-                ClassiEroe.MAGO,
-                new AssorbimentoMagico(new RicaricaATurni(3, 0))
-        );
+        Eroe primo = fabbricaEroi.crea("Primo", ClassiEroe.MAGO);
+        Eroe secondo = fabbricaEroi.crea("Secondo", ClassiEroe.MAGO);
 
         primo.abilita().usa(primo, creaBersaglio());
 
