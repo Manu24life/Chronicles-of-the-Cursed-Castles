@@ -71,10 +71,18 @@ public final class Partita {
     }
 
     public void inizia() {
+        iniziaDa(0);
+    }
+
+    /** Avvia una partita da un castello specifico, per consentire la ripresa della progressione. */
+    public void iniziaDa(int indice) {
         if (stato != StatoPartita.NON_INIZIATA) {
             throw new IllegalStateException("La partita è già iniziata");
         }
-        avviaCastello(0);
+        if (indice < 0 || indice >= castelli.size()) {
+            throw new IllegalArgumentException("Indice del castello iniziale non valido: " + indice);
+        }
+        avviaCastello(indice);
     }
 
     /**

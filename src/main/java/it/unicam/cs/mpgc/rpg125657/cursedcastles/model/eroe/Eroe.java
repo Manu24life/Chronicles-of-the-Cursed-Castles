@@ -16,6 +16,7 @@ public interface Eroe extends Combattente, Potenziabile {
 
     /** Azzera gli stati che, per regola, non si trasferiscono al castello successivo. */
     default void preparaNuovoCastello() {
+        recuperaPuntiVita(statisticheBase().puntiVitaMassimi());
         azzeraBonus();
         abilita().reset();
     }

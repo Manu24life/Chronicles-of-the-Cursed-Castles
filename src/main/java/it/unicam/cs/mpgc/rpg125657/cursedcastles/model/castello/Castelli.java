@@ -4,6 +4,8 @@ import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.mostro.TipiMostro;
 import lombok.experimental.UtilityClass;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /** I tre castelli previsti dalla configurazione iniziale del gioco. */
 @UtilityClass
@@ -26,5 +28,12 @@ public class Castelli {
 
     public static List<Castello> tutti() {
         return TUTTI;
+    }
+
+    public static Optional<Castello> daCodice(String codice) {
+        Objects.requireNonNull(codice, "Il codice non può essere null");
+        return TUTTI.stream()
+                .filter(castello -> castello.codice().equals(codice))
+                .findFirst();
     }
 }

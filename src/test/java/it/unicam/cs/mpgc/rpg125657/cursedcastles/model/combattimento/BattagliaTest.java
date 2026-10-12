@@ -91,6 +91,7 @@ class BattagliaTest {
 
         battaglia.usaAbilitaEroe();
         battaglia.eseguiTurnoNemico();
+        eroe.subisciDanno(10);
         assertEquals(15, eroe.bonusAttaccoPercentuale());
         assertEquals(2, eroe.abilita().turniRimanenti());
 
@@ -106,6 +107,7 @@ class BattagliaTest {
         assertEquals(0, eroe.bonusAttaccoPercentuale());
         assertEquals(0, eroe.bonusDifesaPercentuale());
         assertEquals(0, eroe.abilita().turniRimanenti());
+        assertEquals(eroe.statisticheBase().puntiVitaMassimi(), eroe.puntiVita());
         assertEquals(2, partita.battagliaCorrente().cureRimanenti());
     }
 

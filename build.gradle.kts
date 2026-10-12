@@ -14,6 +14,8 @@ repositories {
 
 val junitVersion = "5.12.1"
 val lombokVersion = "1.18.48"
+val hibernateVersion = "7.4.12.Final"
+val h2Version = "2.5.250"
 
 java {
     toolchain {
@@ -43,6 +45,12 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    implementation(platform("org.hibernate.orm:hibernate-platform:${hibernateVersion}"))
+    implementation("org.hibernate.orm:hibernate-core")
+    implementation("jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0")
+    implementation("jakarta.transaction:jakarta.transaction-api")
+    runtimeOnly("com.h2database:h2:${h2Version}")
 }
 
 tasks.withType<Test> {
@@ -50,6 +58,12 @@ tasks.withType<Test> {
 }
 
 jlink {
+    addExtraDependencies(
+            "jakarta.enterprise.cdi-api",
+            "jakarta.enterprise.lang-model",
+            "jakarta.annotation-api",
+            "jakarta.interceptor-api"
+    )
     imageZip.set(layout.buildDirectory.file("distributions/app-${javafx.platform.classifier}.zip"))
     options.set(listOf("--strip-debug", "--compress", "zip-6", "--no-header-files", "--no-man-pages"))
     launcher {
