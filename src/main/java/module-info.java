@@ -7,7 +7,7 @@ module it.unicam.cs.mpgc.rpg125657.cursedcastles {
     requires static lombok;
 
     exports it.unicam.cs.mpgc.rpg125657.cursedcastles;
-    exports it.unicam.cs.mpgc.rpg125657.cursedcastles.application.progressione;
+    exports it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.progressione;
     exports it.unicam.cs.mpgc.rpg125657.cursedcastles.model.castello;
     exports it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento;
     exports it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe;

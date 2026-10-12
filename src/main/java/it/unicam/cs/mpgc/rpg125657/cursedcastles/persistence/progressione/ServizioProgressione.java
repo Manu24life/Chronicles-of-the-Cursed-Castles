@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg125657.cursedcastles.application.progressione;
+package it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.progressione;
 
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.castello.Castelli;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.castello.Castello;

@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.hibernate;
 
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.application.progressione.ProgressiPartita;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.progressione.ProgressiPartita;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
