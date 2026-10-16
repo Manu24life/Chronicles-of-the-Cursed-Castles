@@ -113,12 +113,12 @@ public final class Partita {
     }
 
     public Castello castelloCorrente() {
-        verificaPartitaInCorso();
+        verificaCastelloCorrenteDisponibile();
         return castelli.get(indiceCastelloCorrente);
     }
 
     public int numeroCastelloCorrente() {
-        verificaPartitaInCorso();
+        verificaCastelloCorrenteDisponibile();
         return indiceCastelloCorrente + 1;
     }
 
@@ -127,7 +127,7 @@ public final class Partita {
     }
 
     public Battaglia battagliaCorrente() {
-        verificaPartitaInCorso();
+        verificaCastelloCorrenteDisponibile();
         return battagliaCorrente;
     }
 
@@ -156,6 +156,12 @@ public final class Partita {
         StatoPartita statoCorrente = stato();
         if (statoCorrente != StatoPartita.IN_CORSO) {
             throw new IllegalStateException("Operazione non consentita nello stato " + statoCorrente);
+        }
+    }
+
+    private void verificaCastelloCorrenteDisponibile() {
+        if (indiceCastelloCorrente < 0 || battagliaCorrente == null) {
+            throw new IllegalStateException("Non esiste un castello corrente");
         }
     }
 }

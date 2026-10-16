@@ -9,8 +9,17 @@ public final class AttaccoBase implements AzioneCombattimento {
     public RisultatoAzione esegui(Combattente esecutore, Combattente bersaglio) {
         Objects.requireNonNull(esecutore, "L'esecutore non può essere null");
         Objects.requireNonNull(bersaglio, "Il bersaglio non può essere null");
-        if (!esecutore.isVivo() || !bersaglio.isVivo()) {
-            return new RisultatoAzione(false, 0, 0, "L'azione non può essere eseguita");
+        if (!esecutore.isVivo()) {
+            return RisultatoAzione.fallimento(
+                    EsitoAzione.AZIONE_NON_CONSENTITA,
+                    "Un combattente sconfitto non può attaccare"
+            );
+        }
+        if (!bersaglio.isVivo()) {
+            return RisultatoAzione.fallimento(
+                    EsitoAzione.BERSAGLIO_SCONFITTO,
+                    "Il bersaglio è già sconfitto"
+            );
         }
 
         int dannoCalcolato = Math.max(1, esecutore.attacco() - bersaglio.difesa());

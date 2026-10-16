@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe;
 
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.RicaricaATurni;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.RisultatoAzione;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.EsitoAzione;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.abilita.TempraDelCavaliere;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.mostro.Mostro;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.mostro.TipoMostro;
@@ -68,6 +69,7 @@ class AbilitaEroeTest {
         RisultatoAzione secondoTentativo = cavaliere.abilita().usa(cavaliere, bersaglio);
 
         assertFalse(secondoTentativo.riuscita());
+        assertEquals(EsitoAzione.ABILITA_IN_RICARICA, secondoTentativo.codice());
         assertEquals(15, cavaliere.bonusAttaccoPercentuale());
         assertEquals(2, cavaliere.abilita().turniRimanenti());
     }

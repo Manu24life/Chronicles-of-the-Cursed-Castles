@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.abilita;
 
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.Combattente;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.EsitoAzione;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.Ricarica;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.RisultatoAzione;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.Eroe;
@@ -28,10 +29,16 @@ public abstract class AbilitaConRicarica implements AbilitaEroe {
         Objects.requireNonNull(bersaglio, "Il bersaglio non può essere null");
 
         if (!utilizzatore.isVivo()) {
-            return fallimento("Un eroe sconfitto non può usare abilità");
+            return fallimento(
+                    EsitoAzione.AZIONE_NON_CONSENTITA,
+                    "Un eroe sconfitto non può usare abilità"
+            );
         }
         if (!ricarica.isDisponibile()) {
-            return fallimento("Abilità disponibile tra " + ricarica.turniRimanenti() + " turni");
+            return fallimento(
+                    EsitoAzione.ABILITA_IN_RICARICA,
+                    "Abilità disponibile tra " + ricarica.turniRimanenti() + " turni"
+            );
         }
 
         RisultatoAzione risultato = applica(utilizzatore, bersaglio);
@@ -68,7 +75,7 @@ public abstract class AbilitaConRicarica implements AbilitaEroe {
         ricarica.reset();
     }
 
-    private RisultatoAzione fallimento(String descrizione) {
-        return new RisultatoAzione(false, 0, 0, descrizione);
+    private RisultatoAzione fallimento(EsitoAzione codice, String descrizione) {
+        return RisultatoAzione.fallimento(codice, descrizione);
     }
 }

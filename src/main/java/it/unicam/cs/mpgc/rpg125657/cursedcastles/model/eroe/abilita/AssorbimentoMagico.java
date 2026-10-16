@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.abilita;
 
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.Combattente;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.EsitoAzione;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.Ricarica;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.RisultatoAzione;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.Eroe;
@@ -18,7 +19,10 @@ public final class AssorbimentoMagico extends AbilitaConRicarica {
     @Override
     protected RisultatoAzione applica(Eroe utilizzatore, Combattente bersaglio) {
         if (!bersaglio.isVivo()) {
-            return new RisultatoAzione(false, 0, 0, "Il bersaglio è già sconfitto");
+            return RisultatoAzione.fallimento(
+                    EsitoAzione.BERSAGLIO_SCONFITTO,
+                    "Il bersaglio è già sconfitto"
+            );
         }
 
         int dannoEffettivo = Math.min(DANNO_MAGICO, bersaglio.puntiVita());

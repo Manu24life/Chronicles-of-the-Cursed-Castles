@@ -56,6 +56,16 @@ public final class ServizioProgressione {
         return progressi;
     }
 
+    /** Classi registrate per la campagna, esposte come configurazione immutabile. */
+    public List<ClasseEroe> classiDisponibili() {
+        return classi;
+    }
+
+    /** Castelli della campagna nell'ordine obbligatorio di avanzamento. */
+    public List<Castello> castelliCampagna() {
+        return castelli;
+    }
+
     public Eroe ricreaEroe(ProgressiPartita progressi) {
         Objects.requireNonNull(progressi, "I progressi non possono essere null");
         verificaRiferimenti(progressi);
