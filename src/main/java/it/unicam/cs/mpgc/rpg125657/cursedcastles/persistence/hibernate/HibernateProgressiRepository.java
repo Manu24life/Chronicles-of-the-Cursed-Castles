@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.hibernate;
 
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.progressione.ProgressiPartita;
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.progressione.ProgressiRepository;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione.ProgressiPartita;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione.ProgressiRepository;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -66,14 +66,17 @@ public final class HibernateProgressiRepository implements ProgressiRepository {
     }
 
     private <T> T inTransazione(String messaggioErrore, Function<Session, T> operazione) {
-        Transaction transazione = null;
         try (Session sessione = sessionFactory.openSession()) {
-            transazione = sessione.beginTransaction();
-            T risultato = operazione.apply(sessione);
-            transazione.commit();
-            return risultato;
+            Transaction transazione = sessione.beginTransaction();
+            try {
+                T risultato = operazione.apply(sessione);
+                transazione.commit();
+                return risultato;
+            } catch (RuntimeException errore) {
+                eseguiRollback(transazione, errore);
+                throw errore;
+            }
         } catch (RuntimeException errore) {
-            eseguiRollback(transazione, errore);
             if (errore instanceof EccezionePersistenza eccezionePersistenza) {
                 throw eccezionePersistenza;
             }
@@ -82,11 +85,10 @@ public final class HibernateProgressiRepository implements ProgressiRepository {
     }
 
     private void eseguiRollback(Transaction transazione, RuntimeException erroreOriginale) {
-        if (transazione == null || !transazione.isActive()) {
-            return;
-        }
         try {
-            transazione.rollback();
+            if (transazione.isActive()) {
+                transazione.rollback();
+            }
         } catch (RuntimeException erroreRollback) {
             erroreOriginale.addSuppressed(erroreRollback);
         }

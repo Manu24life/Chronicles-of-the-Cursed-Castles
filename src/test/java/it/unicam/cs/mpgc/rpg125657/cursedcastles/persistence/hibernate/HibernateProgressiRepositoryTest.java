@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.hibernate;
 
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.progressione.ProgressiPartita;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione.ProgressiPartita;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class HibernateProgressiRepositoryTest {
 
@@ -61,6 +63,18 @@ class HibernateProgressiRepositoryTest {
         assertEquals("Merlino", caricato.nomeEroe());
         assertEquals("mago", caricato.codiceClasse());
         assertTrue(caricato.codiciCastelliCompletati().isEmpty());
+    }
+
+    @Test
+    void unErroreDiScritturaNonModificaIlSalvataggioPrecedente() {
+        ProgressiPartita precedente = new ProgressiPartita("Merlino", "mago", Set.of("ossa"));
+        repository.sostituisci(precedente);
+
+        // Il codice è formalmente valido, ma supera la dimensione della colonna SQL.
+        ProgressiPartita troppoGrande = ProgressiPartita.nuovi("Altro", "a".repeat(65));
+        assertThrows(EccezionePersistenza.class, () -> repository.sostituisci(troppoGrande));
+
+        assertEquals(precedente, repository.carica().orElseThrow());
     }
 
     @Test

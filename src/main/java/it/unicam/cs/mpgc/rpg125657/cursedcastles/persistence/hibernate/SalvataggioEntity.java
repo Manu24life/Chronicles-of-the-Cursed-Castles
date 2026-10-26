@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.hibernate;
 
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.progressione.ProgressiPartita;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione.ProgressiPartita;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;

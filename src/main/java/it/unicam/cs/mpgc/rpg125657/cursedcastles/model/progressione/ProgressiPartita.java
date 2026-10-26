@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.progressione;
+package it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione;
 
 import java.util.HashSet;
 import java.util.Objects;

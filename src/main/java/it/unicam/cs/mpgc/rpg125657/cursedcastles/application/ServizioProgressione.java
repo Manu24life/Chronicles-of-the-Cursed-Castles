@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.progressione;
+package it.unicam.cs.mpgc.rpg125657.cursedcastles.application;
 
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.castello.Castelli;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.castello.Castello;
@@ -10,6 +10,9 @@ import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.Eroe;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.FabbricaEroi;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.FabbricaEroiStandard;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.partita.Partita;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione.ProgressiPartita;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione.ProgressiRepository;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione.SalvataggioNonValidoException;
 
 import java.util.List;
 import java.util.Objects;
@@ -40,14 +43,15 @@ public final class ServizioProgressione {
         verificaCodiciUnivoci();
     }
 
-    /** Sostituisce il vecchio slot con una nuova progressione priva di castelli completati. */
-    public ProgressiPartita nuovaPartita(String nomeEroe, ClasseEroe classe) {
+    /** Costruisce la partita prima di sostituire lo slot, conservandolo se la costruzione fallisce. */
+    public Partita nuovaPartita(String nomeEroe, ClasseEroe classe, FabbricaNemici fabbricaNemici) {
         ClasseEroe classeRegistrata = classeDaCodice(
                 Objects.requireNonNull(classe, "La classe non può essere null").codice()
         );
         ProgressiPartita progressi = ProgressiPartita.nuovi(nomeEroe, classeRegistrata.codice());
+        Partita candidata = ricostruisciPartita(progressi, fabbricaNemici).orElseThrow();
         repository.sostituisci(progressi);
-        return progressi;
+        return candidata;
     }
 
     public Optional<ProgressiPartita> carica() {
@@ -94,7 +98,7 @@ public final class ServizioProgressione {
         return Optional.of(partita);
     }
 
-    public ProgressiPartita registraCompletamento(Castello castello) {
+    private ProgressiPartita registraCompletamento(Castello castello) {
         Objects.requireNonNull(castello, "Il castello non può essere null");
         int indiceCastello = indiceCastello(castello.codice());
         ProgressiPartita correnti = carica().orElseThrow(
@@ -118,12 +122,6 @@ public final class ServizioProgressione {
         return registraCompletamento(partita.castelloCorrente());
     }
 
-    /** Punto applicativo che persiste la vittoria prima di far avanzare il modello. */
-    public void avanzaDopoVittoria(Partita partita) {
-        registraVittoria(partita);
-        partita.avanzaAlProssimoCastello();
-    }
-
     public void eliminaSalvataggio() {
         repository.elimina();
     }
@@ -145,10 +143,27 @@ public final class ServizioProgressione {
         }
     }
 
+    public boolean campagnaCompletata(ProgressiPartita progressi) {
+        verificaRiferimenti(Objects.requireNonNull(progressi));
+        return indicePrimoCastelloNonCompletato(progressi) == castelli.size();
+    }
+
     private void verificaRiferimenti(ProgressiPartita progressi) {
-        classeDaCodice(progressi.codiceClasse());
-        for (String codiceCastello : progressi.codiciCastelliCompletati()) {
-            indiceCastello(codiceCastello);
+        try {
+            classeDaCodice(progressi.codiceClasse());
+            for (String codiceCastello : progressi.codiciCastelliCompletati()) {
+                indiceCastello(codiceCastello);
+            }
+        } catch (IllegalStateException errore) {
+            throw new SalvataggioNonValidoException(errore.getMessage(), errore);
+        }
+        boolean trovatoIncompleto = false;
+        for (Castello castello : castelli) {
+            if (!progressi.isCastelloCompletato(castello.codice())) {
+                trovatoIncompleto = true;
+            } else if (trovatoIncompleto) {
+                throw new SalvataggioNonValidoException("Il salvataggio contiene castelli completati fuori ordine");
+            }
         }
     }
 
