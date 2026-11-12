@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import it.unicam.cs.mpgc.rpg125657.cursedcastles.view.componenti.ScenarioCastello?>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="it.unicam.cs.mpgc.rpg125657.cursedcastles.view.schermate.SchermataNuovaPartita">
+    <ScenarioCastello opacity="0.35"/>
+    <BorderPane>
+        <padding><Insets top="28" right="42" bottom="28" left="42"/></padding>
+        <top><HBox alignment="CENTER_LEFT"><Button text="‹  Alla soglia" onAction="#indietro" styleClass="quiet"/><Region HBox.hgrow="ALWAYS"/><Label text="NUOVA PARTITA" styleClass="eyebrow"/></HBox></top>
+        <center>
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="transparent-scroll">
+                <content>
+                    <VBox spacing="22" maxWidth="790" alignment="CENTER_LEFT" styleClass="creation-content">
+                        <Label text="PRIMA DEL PRIMO PASSO" styleClass="eyebrow"/>
+                        <Label text="Chi varcherà la soglia?" styleClass="page-title" wrapText="true"/>
+                        <Label text="Scegli il nome e la classe del tuo personaggio." styleClass="muted" wrapText="true"/>
+                        <VBox spacing="9"><Label text="NOME DELL'EROE" styleClass="eyebrow"/><TextField fx:id="nome" promptText="Il tuo nome" maxWidth="500"/><Label fx:id="validazione" styleClass="muted"/></VBox>
+                        <Label text="CLASSE" styleClass="eyebrow"/>
+                        <TilePane fx:id="classi" prefColumns="2" prefTileWidth="325" hgap="16" vgap="16"/>
+                        <Label text="Un unico slot. La progressione viene salvata dopo ogni vittoria; uno scontro incompleto ricomincia dal suo inizio." styleClass="muted" wrapText="true" maxWidth="680"/>
+                        <Button fx:id="inizia" text="Varca la soglia  ›" onAction="#crea" styleClass="primary" minWidth="280"/>
+                    </VBox>
+                </content>
+            </ScrollPane>
+        </center>
+    </BorderPane>
+</StackPane>

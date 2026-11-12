@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import it.unicam.cs.mpgc.rpg125657.cursedcastles.view.componenti.BarraVita?>
+<?import it.unicam.cs.mpgc.rpg125657.cursedcastles.view.componenti.ScenarioBattaglia?>
+<BorderPane fx:id="radiceBattaglia" xmlns:fx="http://javafx.com/fxml" fx:controller="it.unicam.cs.mpgc.rpg125657.cursedcastles.view.schermate.SchermataBattaglia" styleClass="battle-screen">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="24" styleClass="battle-header">
+            <VBox spacing="7" HBox.hgrow="ALWAYS"><Label fx:id="progresso" styleClass="eyebrow"/><Label fx:id="castello" styleClass="castle-title"/></VBox>
+            <Button fx:id="alMenu" text="Alla soglia  ›" onAction="#alMenu" styleClass="quiet"/>
+        </HBox>
+    </top>
+    <center>
+        <StackPane>
+            <ScenarioBattaglia fx:id="scenario"/>
+            <BorderPane>
+                <padding><Insets top="12" right="28" bottom="12" left="28"/></padding>
+                <top><Label fx:id="turno" styleClass="turn-label"/></top>
+                <center><HBox fx:id="nemici" spacing="16" alignment="BOTTOM_CENTER"/></center>
+            </BorderPane>
+                    <VBox fx:id="esito" spacing="12" alignment="CENTER" styleClass="outcome" visible="false" managed="false" maxWidth="680" maxHeight="-Infinity">
+                        <Label fx:id="titoloEsito" styleClass="outcome-title"/>
+                        <Label fx:id="dettaglioEsito" wrapText="true"/>
+                        <Button fx:id="avanti" onAction="#prosegui" styleClass="primary"/>
+                        <Button fx:id="tornaAlMenu" text="Ritorna alla soglia" onAction="#alMenu"/>
+                    </VBox>
+        </StackPane>
+    </center>
+    <bottom>
+        <VBox>
+            <GridPane hgap="24" styleClass="battle-dashboard">
+                <columnConstraints><ColumnConstraints percentWidth="25"/><ColumnConstraints percentWidth="32"/><ColumnConstraints percentWidth="43"/></columnConstraints>
+                <VBox spacing="11" GridPane.columnIndex="0">
+                    <Label fx:id="classeEroe" styleClass="eyebrow"/>
+                    <Label fx:id="nomeEroe" styleClass="hero-name" maxWidth="Infinity"/>
+                    <BarraVita fx:id="vitaEroe"/>
+                    <HBox spacing="24"><VBox spacing="2"><Label text="ATTACCO" styleClass="eyebrow"/><Label fx:id="attacco" styleClass="stat-value"/></VBox><VBox spacing="2"><Label text="DIFESA" styleClass="eyebrow"/><Label fx:id="difesa" styleClass="stat-value"/></VBox></HBox>
+                    <Label fx:id="bonus" styleClass="small-note" wrapText="true"/>
+                </VBox>
+                <VBox spacing="9" GridPane.columnIndex="1">
+                    <Label text="LA TUA AZIONE" styleClass="eyebrow"/>
+                    <Label fx:id="bersaglio" styleClass="muted" maxWidth="Infinity"/>
+                    <Button fx:id="attacca" text="Attacca  [A]" onAction="#attacca" styleClass="primary" maxWidth="Infinity"/>
+                    <Button fx:id="abilita" onAction="#usaAbilita" maxWidth="Infinity" wrapText="true"/>
+                    <Button fx:id="cura" onAction="#cura" maxWidth="Infinity"/>
+                </VBox>
+                <VBox spacing="9" GridPane.columnIndex="2">
+                    <Label text="CRONACA DELLO SCONTRO" styleClass="eyebrow"/>
+                    <ListView fx:id="eventi" prefHeight="173" minHeight="90" VBox.vgrow="ALWAYS" styleClass="combat-log" focusTraversable="false"/>
+                    <Label text="Ultimo evento in alto · Bersagli: 1 / 2 / 3" styleClass="small-note"/>
+                </VBox>
+            </GridPane>
+            <HBox alignment="CENTER_LEFT" styleClass="battle-footer"><Label text="CHRONICLES OF THE CURSED CASTLES" styleClass="footer-note"/><Region HBox.hgrow="ALWAYS"/><Label text="LA VITTORIA LASCIA UNA TRACCIA" styleClass="footer-note"/></HBox>
+        </VBox>
+    </bottom>
+</BorderPane>

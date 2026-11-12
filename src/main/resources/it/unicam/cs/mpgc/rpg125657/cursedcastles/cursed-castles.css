@@ -1,0 +1,98 @@
+/* Tema unico. I colori sono looked-up colors JavaFX, condivisi anche dai dialoghi. */
+.root {
+    coal: #11120f;
+    panel: #1c1e19;
+    bone: #d5c8ad;
+    ash: #aaa28f;
+    iron: #514b3c;
+    blood: #873c38;
+    -fx-base: panel;
+    -fx-background: coal;
+    -fx-accent: #968268;
+    -fx-focus-color: #c8b796;
+    -fx-faint-focus-color: transparent;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 14px;
+    -fx-text-fill: bone;
+}
+.game-root, .battle-screen, .screen { -fx-background-color: coal; }
+.label { -fx-text-fill: bone; }
+.eyebrow { -fx-font-family: "Serif"; -fx-font-size: 11px; -fx-text-fill: ash; }
+.muted { -fx-text-fill: ash; -fx-font-size: 13px; -fx-line-spacing: 4px; }
+.small-note, .footer-note { -fx-text-fill: #a39b88; -fx-font-size: 11px; }
+.section-title { -fx-font-size: 26px; }
+.brand-mark { -fx-font-size: 30px; -fx-text-fill: #b7a17b; }
+.menu-shade { -fx-background-color: linear-gradient(to right, rgba(12,14,11,.95) 0%, rgba(12,14,11,.65) 43%, rgba(12,14,11,.05) 100%); }
+.main-title { -fx-font-size: 64px; -fx-text-fill: #d2c4a5; -fx-line-spacing: -6px; }
+.menu-subtitle { -fx-font-size: 17px; -fx-text-fill: #b1a58d; }
+.page-title { -fx-font-size: 38px; }
+.save-panel { -fx-padding: 16px 20px; -fx-background-color: rgba(18,20,16,.9); -fx-border-color: iron transparent iron transparent; -fx-border-width: 1px; }
+.save-name { -fx-font-size: 20px; }
+.error-text { -fx-text-fill: #d29888; -fx-font-size: 13px; }
+.button, .toggle-button {
+    -fx-text-fill: bone;
+    -fx-background-color: rgba(30,32,26,.93);
+    -fx-background-radius: 0;
+    -fx-border-color: iron;
+    -fx-border-radius: 0;
+    -fx-border-width: 1px;
+    -fx-padding: 11px 18px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER_LEFT;
+}
+.button:hover, .toggle-button:hover { -fx-background-color: #34352a; -fx-border-color: #a39477; }
+.button:focused, .toggle-button:focused { -fx-border-color: #ddccaa; -fx-border-width: 1px; -fx-background-insets: 0; }
+.button:pressed, .toggle-button:pressed { -fx-background-color: #454133; }
+.button:disabled { -fx-opacity: .42; -fx-cursor: default; }
+.button.primary { -fx-background-color: #38372b; -fx-border-color: #978467; }
+.button.primary:hover { -fx-background-color: #4a4434; -fx-border-color: #ceba95; }
+.button.quiet { -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #b2a78f; }
+.button.quiet:hover, .button.quiet:focused { -fx-border-color: iron; -fx-text-fill: bone; }
+.button.danger { -fx-text-fill: #ca9486; }
+.text-field { -fx-background-color: #141711; -fx-background-radius: 0; -fx-border-color: iron; -fx-border-width: 0 0 1px 0; -fx-text-fill: bone; -fx-prompt-text-fill: #8f8979; -fx-padding: 14px; -fx-font-size: 21px; -fx-highlight-fill: #665744; }
+.text-field:focused { -fx-border-color: #b5a080; }
+.creation-content { -fx-padding: 28px 8px 24px 8px; }
+.transparent-scroll, .transparent-scroll > .viewport { -fx-background-color: transparent; }
+.scroll-bar { -fx-background-color: #171a14; }
+.scroll-bar .thumb { -fx-background-color: #514c3c; -fx-background-radius: 0; }
+.scroll-bar .increment-button, .scroll-bar .decrement-button { -fx-background-color: transparent; }
+.class-choice { -fx-padding: 22px; -fx-min-width: 285px; -fx-pref-width: 325px; }
+.class-choice:selected { -fx-background-color: #35362a; -fx-border-color: #c4ae87; }
+.class-initial { -fx-font-size: 52px; -fx-text-fill: #9b8d70; }
+.class-name { -fx-font-size: 25px; }
+.battle-header { -fx-padding: 18px 30px; -fx-border-color: transparent transparent iron transparent; -fx-background-color: #141611; }
+.castle-title { -fx-font-size: 26px; }
+.turn-label { -fx-text-fill: #b6aa8e; -fx-font-size: 13px; -fx-padding: 3px 0 6px 0; }
+.enemy-card { -fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 6px 14px 10px 14px; -fx-alignment: BOTTOM_CENTER; }
+.enemy-card:hover { -fx-background-color: rgba(159,143,106,.055); -fx-border-color: #6d644f; }
+.enemy-card:selected { -fx-background-color: rgba(159,143,106,.07); -fx-border-color: transparent transparent #b09b75 transparent; }
+.enemy-card:focused { -fx-border-color: #b09b75; }
+.enemy-card:disabled { -fx-opacity: .55; }
+.battle-vignette { -fx-background-color: linear-gradient(to bottom, rgba(8,10,8,.45), transparent 28%, transparent 65%, rgba(8,10,8,.55)); }
+.enemy-name { -fx-font-size: 20px; -fx-text-alignment: center; }
+.enemy-caption { -fx-background-color: rgba(12,15,11,.86); -fx-padding: 8px 10px; }
+.turn-label { -fx-background-color: rgba(12,15,11,.85); -fx-padding: 6px 10px; }
+.health { -fx-alignment: CENTER_LEFT; }
+.health-value { -fx-font-size: 12px; -fx-text-fill: #c5b799; }
+.progress-bar { -fx-pref-height: 5px; -fx-min-height: 5px; -fx-max-height: 5px; -fx-padding: 0; -fx-background-insets: 0; }
+.progress-bar .track { -fx-background-color: #34372b; -fx-background-radius: 0; -fx-background-insets: 0; }
+.progress-bar .bar { -fx-background-color: #98524a; -fx-background-radius: 0; -fx-background-insets: 0; -fx-padding: 0; }
+.battle-dashboard { -fx-padding: 20px 30px 18px 30px; -fx-border-color: iron transparent transparent transparent; -fx-background-color: #191c16; }
+.hero-name { -fx-font-size: 24px; }
+.stat-value { -fx-font-size: 29px; -fx-text-fill: #cab996; }
+.combat-log { -fx-background-color: #13160f; -fx-background-insets: 0; -fx-border-color: #34392c; -fx-padding: 4px; }
+.combat-log .list-cell { -fx-background-color: transparent; -fx-padding: 7px 8px; }
+.combat-log .list-cell .label { -fx-font-size: 13px; -fx-text-fill: #b7af9b; -fx-line-spacing: 3px; }
+.combat-log .list-cell:filled:selected { -fx-background-color: #2c3024; }
+.outcome { -fx-background-color: rgba(16,19,14,.96); -fx-border-color: #7d6c50; -fx-padding: 14px; }
+.outcome-title { -fx-font-size: 24px; }
+.outcome .label { -fx-text-alignment: center; }
+.battle-footer { -fx-padding: 9px 30px; -fx-background-color: #11140e; }
+.loading-veil { -fx-background-color: rgba(11,13,9,.9); }
+.loading-veil .label { -fx-font-size: 17px; -fx-text-fill: #c7b897; }
+.progress-indicator { -fx-progress-color: #a79572; }
+.dark-dialog { -fx-background-color: #191c16; -fx-border-color: #807154; }
+.dark-dialog .header-panel { -fx-background-color: #191c16; }
+.dark-dialog .header-panel .label { -fx-font-size: 21px; }
+.dark-dialog .content.label { -fx-font-size: 14px; -fx-padding: 16px 0; }

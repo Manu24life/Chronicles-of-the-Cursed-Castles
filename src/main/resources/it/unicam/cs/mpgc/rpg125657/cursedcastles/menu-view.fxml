@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import it.unicam.cs.mpgc.rpg125657.cursedcastles.view.componenti.ScenarioCastello?>
+<StackPane fx:id="radiceMenu" xmlns:fx="http://javafx.com/fxml" fx:controller="it.unicam.cs.mpgc.rpg125657.cursedcastles.view.schermate.SchermataMenu">
+    <ScenarioCastello/>
+    <Region styleClass="menu-shade" mouseTransparent="true"/>
+    <BorderPane styleClass="menu-layout">
+        <padding><Insets top="28" right="42" bottom="24" left="48"/></padding>
+        <top><HBox alignment="CENTER_LEFT" spacing="14"><Label text="◇" styleClass="brand-mark"/><Label text="CHRONICLES OF THE CURSED CASTLES" styleClass="eyebrow"/><Region HBox.hgrow="ALWAYS"/><Label text="I · II · III" styleClass="muted"/></HBox></top>
+        <center>
+            <VBox alignment="CENTER_LEFT" spacing="17" maxWidth="640">
+                <Label text="UN CAMMINO ATTRAVERSO LA ROVINA" styleClass="eyebrow"/>
+                <Label fx:id="titolo" text="Chronicles&#10;of the Cursed&#10;Castles" styleClass="main-title" wrapText="true"/>
+                <Label text="Tre castelli. Un solo cammino." styleClass="menu-subtitle"/>
+                <VBox spacing="9" maxWidth="330">
+                    <VBox.margin><Insets top="12" bottom="6"/></VBox.margin>
+                    <Button fx:id="continua" text="Continua dal checkpoint" maxWidth="Infinity" onAction="#continuaPartita" styleClass="primary"/>
+                    <Button fx:id="nuova" text="Nuova partita" maxWidth="Infinity" onAction="#nuovaPartita"/>
+                    <Button text="Abbandona la soglia" maxWidth="Infinity" onAction="#esci" styleClass="quiet"/>
+                </VBox>
+            </VBox>
+        </center>
+        <bottom>
+            <VBox spacing="10">
+                <HBox alignment="CENTER_LEFT" spacing="24" styleClass="save-panel">
+                    <VBox spacing="7" HBox.hgrow="ALWAYS"><Label text="L'ULTIMA TRACCIA" styleClass="eyebrow"/><Label fx:id="nomeSalvato" styleClass="save-name"/><Label fx:id="dettagliSalvataggio" styleClass="muted" wrapText="true"/></VBox>
+                    <Button fx:id="rileggi" text="Rileggi" onAction="#rileggiSalvataggio" styleClass="quiet"/>
+                    <Button fx:id="elimina" text="Cancella traccia" onAction="#eliminaSalvataggio" styleClass="quiet danger"/>
+                </HBox>
+                <Label fx:id="errore" text="Lettura non riuscita. Puoi riprovare o cancellare lo slot per ricominciare." styleClass="error-text" wrapText="true"/>
+                <Label text="COMBATTIMENTO A TURNI    /    PROGRESSI SALVATI ALLA VITTORIA" styleClass="footer-note"/>
+            </VBox>
+        </bottom>
+    </BorderPane>
+</StackPane>
