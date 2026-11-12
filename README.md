@@ -91,8 +91,8 @@ Per costruire e avviare un runtime autonomo su Windows:
 I sette PNG sono incorporati nelle risorse del package dell'applicazione, sotto `grafica`:
 quattro sprite trasparenti (`nemici`) e tre panorami (`scenari`). Sono asset originali generati
 con lo strumento immagini integrato, usando il riferimento visivo fornito per lo stile.
-Il file `grafica/prompts.json` conserva i prompt di generazione e `grafica/README.md` ne descrive
-uso e provenienza. Non vengono utilizzati asset originali di Fear & Hunger.
+Il file `grafica/README.md` ne descrive uso e provenienza.
+Non vengono utilizzati asset originali di Fear & Hunger.
 
 I nemici mantengono le proporzioni; il drago ha un'area visiva più ampia. Gli sfondi vengono
 ritagliati proporzionalmente al ridimensionamento, mantenendo il pavimento. Il danno produce
