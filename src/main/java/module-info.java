@@ -1,6 +1,7 @@
 module it.unicam.cs.mpgc.rpg125657.cursedcastles {
     requires javafx.controls;
     requires javafx.fxml;
+    requires com.almasb.fxgl.core;
     requires java.naming;
     requires org.hibernate.orm.core;
     requires jakarta.persistence;
@@ -20,5 +21,7 @@ module it.unicam.cs.mpgc.rpg125657.cursedcastles {
     exports it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.hibernate;
 
     opens it.unicam.cs.mpgc.rpg125657.cursedcastles.controller to javafx.fxml;
+    opens it.unicam.cs.mpgc.rpg125657.cursedcastles.view.schermate to javafx.fxml;
+    opens it.unicam.cs.mpgc.rpg125657.cursedcastles.view.componenti to javafx.fxml;
     opens it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.hibernate to org.hibernate.orm.core;
 }

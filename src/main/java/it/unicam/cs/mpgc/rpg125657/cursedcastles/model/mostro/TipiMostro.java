@@ -8,15 +8,15 @@ import lombok.experimental.UtilityClass;
 public class TipiMostro {
 
     public static final TipoMostro SCHELETRO = new TipoMostro(
-            "scheletro", "Scheletro", new Statistiche(35, 10, 2)
+            "scheletro", "Scheletro", new Statistiche(35, 14, 2)
     );
     public static final TipoMostro ORCO = new TipoMostro(
-            "orco", "Orco", new Statistiche(65, 15, 5)
+            "orco", "Orco", new Statistiche(65, 20, 5)
     );
     public static final TipoMostro VAMPIRO = new TipoMostro(
-            "vampiro", "Vampiro", new Statistiche(80, 18, 7)
+            "vampiro", "Vampiro", new Statistiche(80, 26, 7)
     );
     public static final TipoMostro DRAGO = new TipoMostro(
-            "drago", "Drago", new Statistiche(320, 25, 12)
+            "drago", "Drago", new Statistiche(320, 30, 12)
     );
 }
