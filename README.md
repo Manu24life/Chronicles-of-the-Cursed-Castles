@@ -92,7 +92,9 @@ I sette PNG sono incorporati nelle risorse del package dell'applicazione, sotto 
 quattro sprite trasparenti (`nemici`) e tre panorami (`scenari`). Sono asset originali generati
 con lo strumento immagini integrato, usando il riferimento visivo fornito per lo stile.
 Il file `grafica/README.md` ne descrive uso e provenienza.
-Non vengono utilizzati asset originali di Fear & Hunger.
+Gli asset sono stati realizzati inizialmente in Figma insieme allo strumento immagini integrato prendendo spunto dal noto gioco Fear & Hunger.
+
+
 
 I nemici mantengono le proporzioni; il drago ha un'area visiva più ampia. Gli sfondi vengono
 ritagliati proporzionalmente al ridimensionamento, mantenendo il pavimento. Il danno produce
