@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-/** Coordina progressione persistente e ricostruzione del modello runtime. */
+/**
+ * Coordina progressione persistente e ricostruzione del modello runtime.
+ */
 public final class ServizioProgressione {
 
     private final ProgressiRepository repository;
@@ -26,10 +28,26 @@ public final class ServizioProgressione {
     private final List<ClasseEroe> classi;
     private final List<Castello> castelli;
 
+    /**
+     * Configura il repository e i cataloghi usati per validare e ricostruire la progressione.
+     *
+     * @param repository repository dello slot di salvataggio
+     * @throws NullPointerException se uno degli argomenti è null
+     */
     public ServizioProgressione(ProgressiRepository repository) {
         this(repository, new FabbricaEroiStandard(), ClassiEroe.tutte(), Castelli.tutti());
     }
 
+    /**
+     * Configura il repository e i cataloghi usati per validare e ricostruire la progressione.
+     *
+     * @param repository repository dello slot di salvataggio
+     * @param fabbricaEroi fabbrica utilizzata per ricostruire gli eroi
+     * @param classi catalogo delle classi selezionabili
+     * @param castelli sequenza ordinata dei castelli della campagna
+     * @throws NullPointerException se uno degli argomenti è null
+     * @throws IllegalArgumentException se un catalogo è vuoto, contiene null o presenta codici duplicati
+     */
     public ServizioProgressione(
             ProgressiRepository repository,
             FabbricaEroi fabbricaEroi,
@@ -43,7 +61,18 @@ public final class ServizioProgressione {
         verificaCodiciUnivoci();
     }
 
-    /** Costruisce la partita prima di sostituire lo slot, conservandolo se la costruzione fallisce. */
+    /**
+     * Costruisce una nuova partita prima di sostituire lo slot; conserva il precedente salvataggio se la
+     * costruzione fallisce.
+     *
+     * @param nomeEroe nome dell'eroe, ripulito dagli spazi iniziali e finali
+     * @param classe archetipo dell'eroe con statistiche e abilità predefinita
+     * @param fabbricaNemici fabbrica che crea nuovi avversari per ogni castello
+     * @return partita appena creata e avviata
+     * @throws NullPointerException se almeno uno tra {@code classe} è {@code null}
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se l’accesso al
+     *     salvataggio non riesce
+     */
     public Partita nuovaPartita(String nomeEroe, ClasseEroe classe, FabbricaNemici fabbricaNemici) {
         ClasseEroe classeRegistrata = classeDaCodice(
                 Objects.requireNonNull(classe, "La classe non può essere null").codice()
@@ -54,22 +83,49 @@ public final class ServizioProgressione {
         return candidata;
     }
 
+    /**
+     * Legge lo slot di salvataggio, se presente.
+     *
+     * @return salvataggio presente, oppure {@link java.util.Optional#empty()} se lo slot è vuoto
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione.SalvataggioNonValidoException se i
+     *     progressi contengono riferimenti sconosciuti o castelli completati fuori ordine
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se l’accesso al
+     *     salvataggio non riesce
+     */
     public Optional<ProgressiPartita> carica() {
         Optional<ProgressiPartita> progressi = repository.carica();
         progressi.ifPresent(this::verificaRiferimenti);
         return progressi;
     }
 
-    /** Classi registrate per la campagna, esposte come configurazione immutabile. */
+    /**
+     * Restituisce le classi registrate per la campagna come lista immutabile.
+     *
+     * @return lista immutabile delle classi selezionabili
+     */
     public List<ClasseEroe> classiDisponibili() {
         return classi;
     }
 
-    /** Castelli della campagna nell'ordine obbligatorio di avanzamento. */
+    /**
+     * Restituisce la sequenza immutabile dei castelli della campagna.
+     *
+     * @return lista immutabile dei castelli della campagna
+     */
     public List<Castello> castelliCampagna() {
         return castelli;
     }
 
+    /**
+     * Ricostruisce un eroe con le statistiche iniziali della classe salvata, dopo aver validato i riferimenti della
+     * progressione.
+     *
+     * @param progressi dati persistenti della progressione
+     * @return nuovo eroe con statistiche iniziali
+     * @throws NullPointerException se almeno uno tra {@code progressi} è {@code null}
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione.SalvataggioNonValidoException se i
+     *     progressi contengono riferimenti sconosciuti o castelli completati fuori ordine
+     */
     public Eroe ricreaEroe(ProgressiPartita progressi) {
         Objects.requireNonNull(progressi, "I progressi non possono essere null");
         verificaRiferimenti(progressi);
@@ -77,8 +133,15 @@ public final class ServizioProgressione {
     }
 
     /**
-     * Ricrea solo lo stato necessario ad affrontare il primo castello non completato.
-     * Restituisce empty quando la campagna è già stata completata.
+     * Ricostruisce una nuova battaglia dal primo castello incompleto, senza ripristinare danni o bonus dello
+     * scontro interrotto.
+     *
+     * @param progressi dati persistenti della progressione
+     * @param fabbricaNemici fabbrica che crea nuovi avversari per ogni castello
+     * @return partita avviata, oppure {@link java.util.Optional#empty()} se la campagna è completa
+     * @throws NullPointerException se almeno uno tra {@code progressi}, {@code fabbricaNemici} è {@code null}
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione.SalvataggioNonValidoException se i
+     *     progressi contengono riferimenti sconosciuti o castelli completati fuori ordine
      */
     public Optional<Partita> ricostruisciPartita(
             ProgressiPartita progressi,
@@ -113,7 +176,17 @@ public final class ServizioProgressione {
         return aggiornati;
     }
 
-    /** Registra il castello solo se la battaglia corrente è stata effettivamente vinta. */
+    /**
+     * Registra il completamento del castello corrente solo dopo una vittoria, rispettando l’ordine della campagna.
+     *
+     * @param partita partita o snapshot da elaborare
+     * @return progressione aggiornata e salvata
+     * @throws NullPointerException se almeno uno tra {@code partita} è {@code null}
+     * @throws IllegalStateException se manca un salvataggio, la battaglia non è vinta o i castelli sono completati
+     *     fuori ordine
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se l’accesso al
+     *     salvataggio non riesce
+     */
     public ProgressiPartita registraVittoria(Partita partita) {
         Objects.requireNonNull(partita, "La partita non può essere null");
         if (partita.battagliaCorrente().stato() != StatoBattaglia.VITTORIA) {
@@ -122,6 +195,12 @@ public final class ServizioProgressione {
         return registraCompletamento(partita.castelloCorrente());
     }
 
+    /**
+     * Elimina lo slot persistente di salvataggio.
+     *
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se l’accesso al
+     *     salvataggio non riesce
+     */
     public void eliminaSalvataggio() {
         repository.elimina();
     }
@@ -143,6 +222,16 @@ public final class ServizioProgressione {
         }
     }
 
+    /**
+     * Verifica che tutti i castelli della campagna siano completati, dopo aver validato i riferimenti del
+     * salvataggio.
+     *
+     * @param progressi dati persistenti della progressione
+     * @return {@code true} se tutti i castelli configurati risultano completati
+     * @throws NullPointerException se almeno uno tra {@code progressi} è {@code null}
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.model.progressione.SalvataggioNonValidoException se i
+     *     progressi contengono riferimenti sconosciuti o castelli completati fuori ordine
+     */
     public boolean campagnaCompletata(ProgressiPartita progressi) {
         verificaRiferimenti(Objects.requireNonNull(progressi));
         return indicePrimoCastelloNonCompletato(progressi) == castelli.size();

@@ -6,7 +6,9 @@ import lombok.experimental.Accessors;
 import java.util.List;
 import java.util.Objects;
 
-/** Configurazione immutabile di un castello e del suo gruppo di nemici. */
+/**
+ * Rappresenta la configurazione immutabile di un castello e del suo gruppo di nemici.
+ */
 @Getter
 @Accessors(fluent = true)
 public final class Castello {
@@ -15,10 +17,27 @@ public final class Castello {
     private final String nome;
     private final List<ConfigurazioneNemici> configurazioni;
 
+    /**
+     * Crea la configurazione ricavando il codice stabile dal nome fornito.
+     *
+     * @param nome nome visualizzato
+     * @param configurazioni gruppi di nemici del castello, copiati in una lista immutabile
+     */
     public Castello(String nome, List<ConfigurazioneNemici> configurazioni) {
         this(codiceDaNome(nome), nome, configurazioni);
     }
 
+    /**
+     * Inizializza un’istanza di {@code Castello} con le dipendenze ricevute.
+     *
+     * @param codice identificativo stabile usato per riconoscere la configurazione
+     * @param nome nome visualizzato
+     * @param configurazioni gruppi di nemici del castello, copiati in una lista immutabile
+     * @throws NullPointerException se almeno uno tra {@code codice}, {@code nome}, {@code configurazioni} è
+     *     {@code null}
+     * @throws IllegalArgumentException se nome o configurazioni sono vuoti oppure il codice non rispetta il formato
+     *     previsto
+     */
     public Castello(String codice, String nome, List<ConfigurazioneNemici> configurazioni) {
         Objects.requireNonNull(codice, "Il codice non può essere null");
         if (codice.isBlank() || !codice.matches("[a-z0-9]+(?:-[a-z0-9]+)*")) {

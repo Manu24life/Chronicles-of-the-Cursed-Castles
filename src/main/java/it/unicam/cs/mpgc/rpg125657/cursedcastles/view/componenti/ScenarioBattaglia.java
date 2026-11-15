@@ -6,12 +6,17 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 
-/** Panorama FXGL con ritaglio proporzionale; conserva il pavimento nella finestra minima. */
+/**
+ * Panorama FXGL con ritaglio proporzionale; conserva il pavimento nella finestra minima.
+ */
 public final class ScenarioBattaglia extends Region {
     private Texture panorama;
     private final Region vignetta = new Region();
     private String codice = "";
 
+    /**
+     * Inizializza un’istanza di {@code ScenarioBattaglia} con le dipendenze ricevute.
+     */
     public ScenarioBattaglia() {
         setMinSize(0, 0);
         setMouseTransparent(true);
@@ -23,6 +28,11 @@ public final class ScenarioBattaglia extends Region {
         setClip(ritaglio);
     }
 
+    /**
+     * Aggiorna lo sfondo del castello mantenendo il ritaglio proporzionale.
+     *
+     * @param codice identificativo stabile usato per riconoscere la configurazione
+     */
     public void mostra(String codice) {
         if (this.codice.equals(codice)) return;
         Texture nuovo = RisorseBattaglia.scenario(codice);

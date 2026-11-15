@@ -10,22 +10,35 @@ import javafx.scene.paint.Stop;
 
 import java.util.Random;
 
-/** Incisione originale, deterministica: viene ridisegnata soltanto al cambio di scena o dimensione. */
+/**
+ * Incisione originale, deterministica: viene ridisegnata soltanto al cambio di scena o dimensione.
+ */
 public final class ScenarioCastello extends Region {
     private final Canvas tela = new Canvas();
     private String codice = "menu";
 
+    /**
+     * Inizializza un’istanza di {@code ScenarioCastello} con le dipendenze ricevute.
+     */
     public ScenarioCastello() {
         getChildren().add(tela);
         setMouseTransparent(true);
         setMinSize(0, 0);
     }
 
+    /**
+     * Seleziona il castello da disegnare e richiede l’aggiornamento dello scenario.
+     *
+     * @param codice identificativo stabile usato per riconoscere la configurazione
+     */
     public void mostra(String codice) {
         this.codice = codice;
         disegna();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void layoutChildren() {
         tela.setWidth(getWidth());

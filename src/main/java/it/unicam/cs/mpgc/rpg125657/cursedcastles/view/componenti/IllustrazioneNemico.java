@@ -11,7 +11,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-/** Sprite 2D con texture e feedback FXGL, indipendente dalle regole di combattimento. */
+/**
+ * Sprite 2D con texture e feedback FXGL, indipendente dalle regole di combattimento.
+ */
 public final class IllustrazioneNemico extends Region {
     private final Texture sprite;
     private Animation<?> animazione;
@@ -29,6 +31,11 @@ public final class IllustrazioneNemico extends Region {
         }
     };
 
+    /**
+     * Inizializza un’istanza di {@code IllustrazioneNemico} con le dipendenze ricevute.
+     *
+     * @param tipo codice dello sprite del nemico
+     */
     public IllustrazioneNemico(String tipo) {
         sprite = RisorseBattaglia.nemico(tipo);
         sprite.setPreserveRatio(true);
@@ -53,6 +60,11 @@ public final class IllustrazioneNemico extends Region {
         sprite.relocate((getWidth() - iw * scala) / 2, getHeight() - ih * scala - 5);
     }
 
+    /**
+     * Riproduce il feedback visivo del danno e, se necessario, della sconfitta.
+     *
+     * @param sconfitto indicatore di sconfitta del nemico
+     */
     public void riceviDanno(boolean sconfitto) {
         terminaAnimazione();
         if (!visibileInFinestra()) {

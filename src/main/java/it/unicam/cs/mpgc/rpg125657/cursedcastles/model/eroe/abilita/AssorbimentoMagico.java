@@ -6,16 +6,26 @@ import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.Ricarica;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.RisultatoAzione;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.Eroe;
 
-/** Infligge un danno magico lieve e cura il 30% dei punti vita massimi. */
+/**
+ * Infligge un danno magico lieve e cura il 30% dei punti vita massimi.
+ */
 public final class AssorbimentoMagico extends AbilitaConRicarica {
 
     private static final int DANNO_MAGICO = 8;
     private static final int CURA_PERCENTUALE = 30;
 
+    /**
+     * Inizializza un’istanza di {@code AssorbimentoMagico} con le dipendenze ricevute.
+     *
+     * @param ricarica politica che regola la disponibilità dell'abilità
+     */
     public AssorbimentoMagico(Ricarica ricarica) {
         super("Assorbimento magico", ricarica);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected RisultatoAzione applica(Eroe utilizzatore, Combattente bersaglio) {
         if (!bersaglio.isVivo()) {

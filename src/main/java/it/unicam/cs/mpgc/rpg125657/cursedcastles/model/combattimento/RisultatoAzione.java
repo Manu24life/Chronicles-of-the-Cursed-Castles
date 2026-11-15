@@ -2,7 +2,15 @@ package it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento;
 
 import java.util.Objects;
 
-/** Informazioni prodotte da un'azione e utilizzabili anche dall'interfaccia grafica. */
+/**
+ * Rappresenta le informazioni prodotte da un'azione e utilizzabili anche dall'interfaccia grafica.
+ *
+ * @param riuscita indicatore di successo dell'azione
+ * @param dannoInflitto danno effettivo, non negativo
+ * @param puntiVitaRecuperati cura effettiva, non negativa
+ * @param descrizione testo descrittivo dell'esito
+ * @param codice codice coerente con il successo o il fallimento dell’azione
+ */
 public record RisultatoAzione(
         boolean riuscita,
         int dannoInflitto,
@@ -10,6 +18,14 @@ public record RisultatoAzione(
         String descrizione,
         EsitoAzione codice
 ) {
+    /**
+     * Inizializza i dati immutabili di {@code RisultatoAzione}, verificando i vincoli dei componenti.
+     *
+     * @param riuscita indicatore di successo dell'azione
+     * @param dannoInflitto danno effettivo, non negativo
+     * @param puntiVitaRecuperati cura effettiva, non negativa
+     * @param descrizione testo descrittivo dell'esito
+     */
     public RisultatoAzione(
             boolean riuscita,
             int dannoInflitto,
@@ -27,6 +43,17 @@ public record RisultatoAzione(
         );
     }
 
+    /**
+     * Inizializza i dati immutabili di {@code RisultatoAzione}, verificando i vincoli dei componenti.
+     *
+     * @param riuscita indicatore di successo dell'azione
+     * @param dannoInflitto danno effettivo, non negativo
+     * @param puntiVitaRecuperati cura effettiva, non negativa
+     * @param descrizione testo descrittivo dell'esito
+     * @param codice codice coerente con il successo o il fallimento dell’azione
+     * @throws NullPointerException se almeno uno tra {@code descrizione}, {@code codice} è {@code null}
+     * @throws IllegalArgumentException se danno, cura e codice non sono coerenti con l’esito dichiarato
+     */
     public RisultatoAzione {
         if (dannoInflitto < 0 || puntiVitaRecuperati < 0) {
             throw new IllegalArgumentException("Danno e cura non possono essere negativi");
@@ -41,6 +68,14 @@ public record RisultatoAzione(
         }
     }
 
+    /**
+     * Crea un esito riuscito con danno e cura effettivi e codice {@link EsitoAzione#SUCCESSO}.
+     *
+     * @param dannoInflitto danno effettivo, non negativo
+     * @param puntiVitaRecuperati cura effettiva, non negativa
+     * @param descrizione testo descrittivo dell'esito
+     * @return esito dell’azione, con successo o motivo del fallimento e variazioni effettive di vita
+     */
     public static RisultatoAzione successo(
             int dannoInflitto,
             int puntiVitaRecuperati,
@@ -55,6 +90,14 @@ public record RisultatoAzione(
         );
     }
 
+    /**
+     * Crea un esito fallito senza danno o cura, associato a un codice diverso da {@link EsitoAzione#SUCCESSO}.
+     *
+     * @param codice codice coerente con il successo o il fallimento dell’azione
+     * @param descrizione testo descrittivo dell'esito
+     * @return esito dell’azione, con successo o motivo del fallimento e variazioni effettive di vita
+     * @throws IllegalArgumentException se il codice è {@link EsitoAzione#SUCCESSO}
+     */
     public static RisultatoAzione fallimento(
             EsitoAzione codice,
             String descrizione

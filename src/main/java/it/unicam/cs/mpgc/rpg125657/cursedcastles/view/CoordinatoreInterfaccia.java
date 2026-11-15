@@ -28,7 +28,9 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** Traduce gesti e navigazione in comandi esistenti; non contiene regole di combattimento. */
+/**
+ * Traduce gesti e navigazione in comandi esistenti; non contiene regole di combattimento.
+ */
 public final class CoordinatoreInterfaccia implements AutoCloseable {
     private static final Logger LOG = Logger.getLogger(CoordinatoreInterfaccia.class.getName());
     private final GestoreViste viste;
@@ -49,6 +51,12 @@ public final class CoordinatoreInterfaccia implements AutoCloseable {
     private boolean chiuso;
     private boolean letturaFallita;
 
+    /**
+     * Inizializza un’istanza di {@code CoordinatoreInterfaccia} con le dipendenze ricevute.
+     *
+     * @param viste gestore del caricamento e della navigazione delle schermate
+     * @param finestra finestra principale dell'applicazione
+     */
     public CoordinatoreInterfaccia(GestoreViste viste, Stage finestra) {
         this.viste = viste;
         this.finestra = finestra;
@@ -56,6 +64,11 @@ public final class CoordinatoreInterfaccia implements AutoCloseable {
         attesaNemico.setOnFinished(e -> eseguiBattaglia(battaglia::eseguiTurnoNemico));
     }
 
+    /**
+     * Avvia il coordinatore e presenta il menu, usando i controller forniti oppure inizializzando il database
+     * locale in modo asincrono.
+     *
+     */
     public void avvia() {
         operazione("Aprendo il libro delle tracce…", () -> {
             RisorseBattaglia.precarica();
@@ -73,13 +86,23 @@ public final class CoordinatoreInterfaccia implements AutoCloseable {
         });
     }
 
-    /** Punto di composizione utilizzabile anche con un repository di test. */
+    /**
+     * Avvia il coordinatore e presenta il menu, usando i controller forniti oppure inizializzando il database
+     * locale in modo asincrono.
+     *
+     * @param menu controller dei comandi del menu
+     * @param battaglia controller dei comandi di combattimento
+     */
     public void avvia(MenuController menu, BattagliaController battaglia) {
         this.menu = menu;
         this.battaglia = battaglia;
         mostraMenu();
     }
 
+    /**
+     * Aggiorna i dati del menu in modo asincrono e ne apre la schermata.
+     *
+     */
     public void mostraMenu() {
         if (occupato || chiuso) return;
         attesaNemico.stop();
@@ -100,10 +123,19 @@ public final class CoordinatoreInterfaccia implements AutoCloseable {
         viste.mostra("menu-view.fxml", new SchermataMenu(this)).mostra(statoMenu, letturaFallita);
     }
 
+    /**
+     * Verifica se lo snapshot corrente rappresenta una partita ancora in corso.
+     *
+     * @return {@code true} se esiste una partita in corso nello snapshot
+     */
     public boolean puoRiprendere() {
         return partita != null && partita.statoPartita() == StatoPartita.IN_CORSO;
     }
 
+    /**
+     * Apre la schermata di creazione usando le classi disponibili nel menu.
+     *
+     */
     public void mostraCreazione() {
         if (occupato || chiuso) return;
         inBattaglia = false;
@@ -111,6 +143,12 @@ public final class CoordinatoreInterfaccia implements AutoCloseable {
                 .mostra(statoMenu.classiDisponibili());
     }
 
+    /**
+     * Richiede la conferma di sostituzione quando necessaria e avvia la nuova partita in modo asincrono.
+     *
+     * @param nome nome visualizzato
+     * @param classe codice della classe scelta dal giocatore
+     */
     public void nuovaPartita(String nome, String classe) {
         if (occupato || chiuso) return;
         if ((statoMenu.salvataggio().isPresent() || letturaFallita || partita != null)
@@ -126,6 +164,10 @@ public final class CoordinatoreInterfaccia implements AutoCloseable {
         }, this::mostraErrore);
     }
 
+    /**
+     * Riprende la partita in memoria, se disponibile; altrimenti ricostruisce la partita dal salvataggio.
+     *
+     */
     public void continua() {
         if (occupato || chiuso) return;
         if (puoRiprendere()) {
@@ -142,6 +184,10 @@ public final class CoordinatoreInterfaccia implements AutoCloseable {
         }, this::mostraErrore);
     }
 
+    /**
+     * Richiede conferma ed elimina il salvataggio e la sessione corrente in modo asincrono.
+     *
+     */
     public void elimina() {
         if (occupato || chiuso || !dialoghi.conferma("Cancellare l'ultima traccia?",
                 "Il salvataggio e l'eventuale sessione corrente verranno eliminati. Questa azione è definitiva.")) return;
@@ -157,11 +203,25 @@ public final class CoordinatoreInterfaccia implements AutoCloseable {
         }, this::mostraErrore);
     }
 
+    /**
+     * Esegue l’attacco dell’eroe contro il nemico selezionato.
+     *
+     * @param indice indice nella sequenza originale, a partire da zero
+     */
     public void attacca(int indice) { eseguiBattaglia(() -> battaglia.attacca(indice)); }
+    /**
+     * Invia il comando di abilità usando il bersaglio solo quando richiesto dalla classe dell’eroe.
+     *
+     * @param indice indice nella sequenza originale, a partire da zero
+     */
     public void abilita(int indice) {
         boolean bersaglio = partita.castello().orElseThrow().abilitaRichiedeBersaglio();
         eseguiBattaglia(() -> bersaglio ? battaglia.usaAbilita(indice) : battaglia.usaAbilita());
     }
+    /**
+     * Tenta la cura dell’eroe usando gli utilizzi disponibili nel castello.
+     *
+     */
     public void cura() { eseguiBattaglia(battaglia::cura); }
 
     private void eseguiBattaglia(Callable<EsitoComando> comando) {
@@ -177,6 +237,10 @@ public final class CoordinatoreInterfaccia implements AutoCloseable {
         }, this::ricevi, this::mostraErrore);
     }
 
+    /**
+     * Ritenta il salvataggio della vittoria oppure avanza al castello successivo se la vittoria è già salvata.
+     *
+     */
     public void prosegui() {
         if (occupato || chiuso) return;
         StatoCastello castello = partita.castello().orElseThrow();
@@ -247,6 +311,10 @@ public final class CoordinatoreInterfaccia implements AutoCloseable {
         return errore.getMessage() == null ? "Operazione non riuscita. Puoi riprovare." : errore.getMessage();
     }
 
+    /**
+     * Richiede la conferma per abbandonare uno scontro in corso e chiude la finestra.
+     *
+     */
     public void esci() {
         if (partita != null && partita.statoPartita() == StatoPartita.IN_CORSO
                 && !dialoghi.conferma("Lasciare il cammino?",
@@ -254,6 +322,10 @@ public final class CoordinatoreInterfaccia implements AutoCloseable {
         finestra.close();
     }
 
+    /**
+     * Arresta l’attesa del nemico e accoda la chiusura della fabbrica Hibernate dopo i comandi in corso.
+     *
+     */
     @Override
     public void close() {
         if (chiuso) return;

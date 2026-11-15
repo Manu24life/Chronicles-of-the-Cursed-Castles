@@ -8,9 +8,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Avvia l’applicazione JavaFX e collega scena, tema e coordinatore dell’interfaccia.
+ */
 public final class CursedCastlesApplication extends Application {
     private CoordinatoreInterfaccia coordinatore;
 
+    /**
+     * Costruisce la scena principale, collega la gestione della chiusura e avvia il coordinatore.
+     *
+     * @param stage finestra principale fornita da JavaFX
+     * @throws IOException se il caricamento della struttura FXML principale non riesce
+     */
     @Override
     public void start(Stage stage) throws IOException {
         GestoreViste viste = new GestoreViste();
@@ -29,11 +38,20 @@ public final class CursedCastlesApplication extends Application {
         coordinatore.avvia();
     }
 
+    /**
+     * Rilascia le risorse del coordinatore alla terminazione dell’applicazione.
+     *
+     */
     @Override
     public void stop() {
         if (coordinatore != null) coordinatore.close();
     }
 
+    /**
+     * Avvia il runtime JavaFX passando gli argomenti della riga di comando.
+     *
+     * @param args argomenti della riga di comando passati a JavaFX
+     */
     public static void main(String[] args) {
         launch(args);
     }

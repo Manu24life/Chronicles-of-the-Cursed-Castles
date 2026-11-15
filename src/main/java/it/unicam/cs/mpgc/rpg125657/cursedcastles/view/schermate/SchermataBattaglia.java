@@ -18,6 +18,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+/**
+ * Presenta lo stato del combattimento e inoltra i comandi del giocatore al coordinatore.
+ */
 public final class SchermataBattaglia {
     private final CoordinatoreInterfaccia coordinatore;
     private final ObservableList<String> registro;
@@ -48,11 +51,18 @@ public final class SchermataBattaglia {
     @FXML private Label dettaglioEsito;
     @FXML private ListView<String> eventi;
 
+    /**
+     * Inizializza un’istanza di {@code SchermataBattaglia} con le dipendenze ricevute.
+     *
+     * @param coordinatore coordinatore a cui vengono delegati i gesti del giocatore
+     * @param registro elenco osservabile degli eventi di gioco
+     */
     public SchermataBattaglia(CoordinatoreInterfaccia coordinatore, ObservableList<String> registro) {
         this.coordinatore = coordinatore;
         this.registro = registro;
     }
 
+    /** Collega i controlli FXML ai comandi dopo il caricamento della schermata. */
     @FXML private void initialize() {
         eventi.setItems(registro);
         eventi.setCellFactory(lista -> new ListCell<>() {
@@ -78,6 +88,11 @@ public final class SchermataBattaglia {
         });
     }
 
+    /**
+     * Aggiorna eroe, nemici, registro e comandi usando esclusivamente lo snapshot ricevuto.
+     *
+     * @param partita partita o snapshot da elaborare
+     */
     public void mostra(VistaPartita partita) {
         this.partita = partita;
         nomeEroe.setText(partita.eroe().nome());

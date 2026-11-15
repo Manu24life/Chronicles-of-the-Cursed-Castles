@@ -4,17 +4,34 @@ import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.Combattente
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.abilita.AbilitaEroe;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.personaggio.Potenziabile;
 
-/** Contratto del personaggio controllato dal giocatore. */
+/**
+ * Rappresenta il contratto del personaggio controllato dal giocatore.
+ */
 public interface Eroe extends Combattente, Potenziabile {
 
+    /**
+     * Restituisce l’archetipo a cui appartiene l’eroe.
+     *
+     * @return classe dell’eroe
+     */
     ClasseEroe classe();
 
+    /**
+     * Restituisce l’abilità posseduta dall’eroe.
+     *
+     * @return abilità dell’eroe
+     */
     AbilitaEroe abilita();
 
-    /** Aggiorna gli stati dipendenti dai turni quando inizia un nuovo turno dell'eroe. */
+    /**
+     * Aggiorna lo stato della ricarica all’inizio di un nuovo turno dell’eroe.
+     */
     void avanzaTurno();
 
-    /** Azzera gli stati che, per regola, non si trasferiscono al castello successivo. */
+    /**
+     * Ripristina tutti i punti vita, azzera i bonus e reimposta la ricarica all’ingresso di un nuovo castello.
+     *
+     */
     default void preparaNuovoCastello() {
         recuperaPuntiVita(statisticheBase().puntiVitaMassimi());
         azzeraBonus();

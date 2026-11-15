@@ -15,6 +15,9 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
+/**
+ * Presenta la scelta del nome e della classe per una nuova partita.
+ */
 public final class SchermataNuovaPartita {
     private final CoordinatoreInterfaccia coordinatore;
     private final ToggleGroup scelta = new ToggleGroup();
@@ -23,10 +26,16 @@ public final class SchermataNuovaPartita {
     @FXML private Button inizia;
     @FXML private Label validazione;
 
+    /**
+     * Inizializza un’istanza di {@code SchermataNuovaPartita} con le dipendenze ricevute.
+     *
+     * @param coordinatore coordinatore a cui vengono delegati i gesti del giocatore
+     */
     public SchermataNuovaPartita(CoordinatoreInterfaccia coordinatore) {
         this.coordinatore = coordinatore;
     }
 
+    /** Collega i controlli FXML ai comandi dopo il caricamento della schermata. */
     @FXML private void initialize() {
         nome.setTextFormatter(new TextFormatter<String>(c -> c.getControlNewText().length() <= 100 ? c : null));
         nome.textProperty().addListener((o, prima, dopo) -> aggiornaValidazione());
@@ -34,6 +43,11 @@ public final class SchermataNuovaPartita {
         nome.setOnAction(e -> { if (!inizia.isDisabled()) crea(); });
     }
 
+    /**
+     * Popola la scelta delle classi e presenta le statistiche della classe selezionata.
+     *
+     * @param disponibili classi selezionabili nella nuova partita
+     */
     public void mostra(List<ClasseDisponibile> disponibili) {
         for (ClasseDisponibile classe : disponibili) {
             Label simbolo = new Label(classe.nome().substring(0, 1));

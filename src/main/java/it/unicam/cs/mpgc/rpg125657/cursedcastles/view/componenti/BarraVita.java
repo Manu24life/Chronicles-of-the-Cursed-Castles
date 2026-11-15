@@ -8,12 +8,17 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-/** Rappresenta i valori ricevuti dallo snapshot, senza modificare il personaggio. */
+/**
+ * Rappresenta i valori ricevuti dallo snapshot, senza modificare il personaggio.
+ */
 public final class BarraVita extends VBox {
     private final Label valore = new Label();
     private final ProgressBar barra = new ProgressBar(1);
     private Timeline animazione;
 
+    /**
+     * Inizializza un’istanza di {@code BarraVita} con le dipendenze ricevute.
+     */
     public BarraVita() {
         super(6);
         getStyleClass().add("health");
@@ -22,6 +27,12 @@ public final class BarraVita extends VBox {
         getChildren().addAll(valore, barra);
     }
 
+    /**
+     * Aggiorna il riempimento e il testo della barra usando i punti vita ricevuti.
+     *
+     * @param attuali punti vita da visualizzare
+     * @param massimi punti vita massimi di riferimento
+     */
     public void aggiorna(int attuali, int massimi) {
         valore.setText(attuali + " / " + massimi + " PV");
         setAccessibleText("Punti vita: " + attuali + " su " + massimi);

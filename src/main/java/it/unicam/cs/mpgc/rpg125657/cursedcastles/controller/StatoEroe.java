@@ -2,7 +2,19 @@ package it.unicam.cs.mpgc.rpg125657.cursedcastles.controller;
 
 import java.util.Objects;
 
-/** Snapshot immutabile dell'eroe controllato dal giocatore. */
+/**
+ * Rappresenta uno snapshot immutabile dell'eroe controllato dal giocatore.
+ *
+ * @param nome nome visualizzato
+ * @param codiceClasse identificativo della classe dell'eroe
+ * @param nomeClasse nome visualizzato della classe dell'eroe
+ * @param puntiVita punti vita attuali
+ * @param puntiVitaMassimi limite massimo dei punti vita, strettamente positivo
+ * @param attacco valore di attacco
+ * @param difesa valore di difesa
+ * @param bonusAttaccoPercentuale incremento percentuale accumulato dell'attacco
+ * @param bonusDifesaPercentuale incremento percentuale accumulato della difesa
+ */
 public record StatoEroe(
         String nome,
         String codiceClasse,
@@ -15,6 +27,22 @@ public record StatoEroe(
         int bonusDifesaPercentuale
 ) {
 
+    /**
+     * Inizializza i dati immutabili di {@code StatoEroe}, verificando i vincoli dei componenti.
+     *
+     * @param nome nome visualizzato
+     * @param codiceClasse identificativo della classe dell'eroe
+     * @param nomeClasse nome visualizzato della classe dell'eroe
+     * @param puntiVita punti vita attuali
+     * @param puntiVitaMassimi limite massimo dei punti vita, strettamente positivo
+     * @param attacco valore di attacco
+     * @param difesa valore di difesa
+     * @param bonusAttaccoPercentuale incremento percentuale accumulato dell'attacco
+     * @param bonusDifesaPercentuale incremento percentuale accumulato della difesa
+     * @throws NullPointerException se almeno uno tra {@code nome}, {@code codiceClasse}, {@code nomeClasse} è
+     *     {@code null}
+     * @throws IllegalArgumentException se i punti vita non rientrano nei limiti indicati
+     */
     public StatoEroe {
         Objects.requireNonNull(nome, "Il nome dell'eroe non può essere null");
         Objects.requireNonNull(codiceClasse, "Il codice della classe non può essere null");

@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/** Immagini condivise, nodi Texture indipendenti; nessun download durante il gioco. */
+/**
+ * Rappresenta le immagini condivise, nodi Texture indipendenti; nessun download durante il gioco.
+ */
 public final class RisorseBattaglia {
     private static final List<String> NEMICI = List.of("scheletro", "orco", "vampiro", "drago");
     private static final List<String> SCENARI = List.of("ossa", "ferro", "maledizione");
@@ -18,12 +20,23 @@ public final class RisorseBattaglia {
 
     private RisorseBattaglia() { }
 
-    /** Chiamato dall'esecutore di avvio, prima di mostrare il menu. */
+    /**
+     * Carica immagini e limiti degli sprite prima dell’apertura del menu, condividendo i dati delle immagini tra le
+     * viste.
+     *
+     */
     public static void precarica() {
         NEMICI.forEach(RisorseBattaglia::limitiSprite);
         SCENARI.forEach(codice -> immagine("scenari/" + codice));
     }
 
+    /**
+     * Crea una nuova texture del nemico, ritagliata sui pixel visibili e basata su un’immagine condivisa.
+     *
+     * @param tipo codice dello sprite del nemico
+     * @return nuovo nodo texture del nemico
+     * @throws IllegalArgumentException se il tipo di nemico non possiede uno sprite disponibile
+     */
     public static Texture nemico(String tipo) {
         if (!NEMICI.contains(tipo)) throw new IllegalArgumentException("Sprite non disponibile: " + tipo);
         Texture texture = texture("nemici/" + tipo);
@@ -31,6 +44,12 @@ public final class RisorseBattaglia {
         return texture;
     }
 
+    /**
+     * Crea una nuova texture dello scenario; usa il castello delle ossa quando il codice non è riconosciuto.
+     *
+     * @param codice identificativo stabile usato per riconoscere la configurazione
+     * @return nuovo nodo texture dello scenario
+     */
     public static Texture scenario(String codice) {
         // Anche i castelli delle campagne configurabili restano rappresentabili.
         return texture("scenari/" + (SCENARI.contains(codice) ? codice : "ossa"));

@@ -5,14 +5,28 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Window;
 import javafx.geometry.Insets;
 
-/** Dialoghi con lo stesso tema della finestra, senza dipendenze dal dominio. */
+/**
+ * Rappresenta i dialoghi con lo stesso tema della finestra, senza dipendenze dal dominio.
+ */
 public final class DialoghiGioco {
     private final Window proprietario;
 
+    /**
+     * Inizializza un’istanza di {@code DialoghiGioco} con le dipendenze ricevute.
+     *
+     * @param proprietario finestra proprietaria dei dialoghi
+     */
     public DialoghiGioco(Window proprietario) {
         this.proprietario = proprietario;
     }
 
+    /**
+     * Mostra un dialogo modale e verifica la conferma esplicita dell’utente.
+     *
+     * @param titolo intestazione del dialogo
+     * @param messaggio testo del messaggio
+     * @return {@code true} solo se l’utente seleziona la conferma
+     */
     public boolean conferma(String titolo, String messaggio) {
         Alert dialogo = crea(Alert.AlertType.CONFIRMATION, titolo, messaggio);
         ButtonType conferma = new ButtonType("Conferma");
@@ -21,6 +35,11 @@ public final class DialoghiGioco {
         return dialogo.showAndWait().filter(conferma::equals).isPresent();
     }
 
+    /**
+     * Mostra un dialogo modale con il messaggio di errore.
+     *
+     * @param messaggio testo del messaggio
+     */
     public void errore(String messaggio) {
         crea(Alert.AlertType.ERROR, "Qualcosa ha interrotto il cammino", messaggio).showAndWait();
     }

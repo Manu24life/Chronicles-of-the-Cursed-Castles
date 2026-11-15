@@ -1,3 +1,7 @@
+/**
+ * Definisce le dipendenze del gioco e i package accessibili ai client.
+ * Apre alla riflessione i controller FXML e le entità persistenti.
+ */
 module it.unicam.cs.mpgc.rpg125657.cursedcastles {
     requires javafx.controls;
     requires javafx.fxml;

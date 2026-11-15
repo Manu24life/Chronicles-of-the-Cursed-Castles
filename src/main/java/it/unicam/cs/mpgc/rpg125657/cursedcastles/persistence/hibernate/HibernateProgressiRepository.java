@@ -11,11 +11,19 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-/** Implementazione Hibernate del repository dello slot principale. */
+/**
+ * Rappresenta l’implementazione Hibernate del repository dello slot principale.
+ */
 public final class HibernateProgressiRepository implements ProgressiRepository {
 
     private final SessionFactory sessionFactory;
 
+    /**
+     * Inizializza un’istanza di {@code HibernateProgressiRepository} con le dipendenze ricevute.
+     *
+     * @param sessionFactory fabbrica delle sessioni Hibernate, gestita dal chiamante
+     * @throws NullPointerException se almeno uno tra {@code sessionFactory} è {@code null}
+     */
     public HibernateProgressiRepository(SessionFactory sessionFactory) {
         this.sessionFactory = Objects.requireNonNull(
                 sessionFactory,
@@ -23,6 +31,11 @@ public final class HibernateProgressiRepository implements ProgressiRepository {
         );
     }
 
+    /**
+     * {@inheritDoc}
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se l’accesso al
+     *     salvataggio non riesce
+     */
     @Override
     public Optional<ProgressiPartita> carica() {
         return inTransazione("Impossibile caricare il salvataggio", session -> {
@@ -34,6 +47,12 @@ public final class HibernateProgressiRepository implements ProgressiRepository {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     * @throws NullPointerException se almeno uno tra {@code progressi} è {@code null}
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se l’accesso al
+     *     salvataggio non riesce
+     */
     @Override
     public void sostituisci(ProgressiPartita progressi) {
         Objects.requireNonNull(progressi, "I progressi non possono essere null");
@@ -51,6 +70,11 @@ public final class HibernateProgressiRepository implements ProgressiRepository {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se l’accesso al
+     *     salvataggio non riesce
+     */
     @Override
     public void elimina() {
         inTransazione("Impossibile eliminare il salvataggio", session -> {

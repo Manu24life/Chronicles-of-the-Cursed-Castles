@@ -47,14 +47,29 @@ final class SalvataggioEntity {
     @Column(name = "versione", nullable = false)
     private long versione;
 
+    /**
+     * Crea un’entità vuota richiesta da Hibernate.
+     */
     protected SalvataggioEntity() {
     }
 
+    /**
+     * Crea l’entità dello slot principale a partire dai progressi.
+     *
+     * @param progressi dati persistenti da copiare
+     * @throws NullPointerException se i progressi sono null
+     */
     SalvataggioEntity(ProgressiPartita progressi) {
         id = ID_SLOT_PRINCIPALE;
         aggiornaDa(progressi);
     }
 
+    /**
+     * Sostituisce i dati dell’entità mantenendo l’identità dello slot e la versione Hibernate.
+     *
+     * @param progressi dati persistenti da copiare
+     * @throws NullPointerException se i progressi sono null
+     */
     void aggiornaDa(ProgressiPartita progressi) {
         nomeEroe = progressi.nomeEroe();
         codiceClasse = progressi.codiceClasse();
@@ -62,6 +77,13 @@ final class SalvataggioEntity {
         codiciCastelliCompletati.addAll(progressi.codiciCastelliCompletati());
     }
 
+    /**
+     * Ricostruisce i dati immutabili del dominio validando il contenuto dell’entità.
+     *
+     * @return progressione indipendente dalle collezioni Hibernate
+     * @throws IllegalArgumentException se i dati persistenti non rispettano i vincoli del dominio
+     * @throws NullPointerException se mancano dati obbligatori
+     */
     ProgressiPartita aProgressi() {
         return new ProgressiPartita(nomeEroe, codiceClasse, codiciCastelliCompletati);
     }

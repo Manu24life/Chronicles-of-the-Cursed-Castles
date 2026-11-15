@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
+/**
+ * Presenta il menu iniziale e inoltra le azioni al coordinatore dell’interfaccia.
+ */
 public final class SchermataMenu {
     private final CoordinatoreInterfaccia coordinatore;
     @FXML private Button continua;
@@ -19,15 +22,27 @@ public final class SchermataMenu {
     @FXML private Label titolo;
     @FXML private StackPane radiceMenu;
 
+    /**
+     * Inizializza un’istanza di {@code SchermataMenu} con le dipendenze ricevute.
+     *
+     * @param coordinatore coordinatore a cui vengono delegati i gesti del giocatore
+     */
     public SchermataMenu(CoordinatoreInterfaccia coordinatore) {
         this.coordinatore = coordinatore;
     }
 
+    /** Collega i controlli FXML ai comandi dopo il caricamento della schermata. */
     @FXML private void initialize() {
         radiceMenu.heightProperty().addListener((o, prima, dopo) ->
                 titolo.setStyle("-fx-font-size: " + (dopo.doubleValue() < 730 ? 44 : 64) + "px;"));
     }
 
+    /**
+     * Aggiorna riepilogo e disponibilità dei comandi in base al salvataggio e agli eventuali errori di lettura.
+     *
+     * @param menu snapshot dei dati del menu
+     * @param letturaFallita indicatore di errore nella lettura del salvataggio
+     */
     public void mostra(StatoMenu menu, boolean letturaFallita) {
         boolean ripresa = coordinatore.puoRiprendere();
         boolean disponibile = menu.salvataggio().filter(s -> !s.campagnaCompletata()).isPresent();

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Radice dell'aggregato di gioco: governa la progressione ordinata nei castelli
+ * Rappresenta la radice dell'aggregato di gioco: governa la progressione ordinata nei castelli
  * e il ciclo di vita dello stato che deve essere resettato tra un castello e il successivo.
  */
 @Accessors(fluent = true)
@@ -33,6 +33,13 @@ public final class Partita {
     private Battaglia battagliaCorrente;
     private StatoPartita stato = StatoPartita.NON_INIZIATA;
 
+    /**
+     * Configura una campagna con attacchi standard e una nuova cura standard per ciascun castello.
+     *
+     * @param eroe eroe che affronta la campagna
+     * @param castelli sequenza ordinata dei castelli della campagna
+     * @param fabbricaNemici fabbrica che crea nuovi avversari per ogni castello
+     */
     public Partita(Eroe eroe, List<Castello> castelli, FabbricaNemici fabbricaNemici) {
         this(
                 eroe,
@@ -44,6 +51,19 @@ public final class Partita {
         );
     }
 
+    /**
+     * Configura una campagna non ancora iniziata; conserva l’ordine dei castelli e le strategie ricevute.
+     *
+     * @param eroe eroe che affronta la campagna
+     * @param castelli sequenza ordinata dei castelli della campagna
+     * @param fabbricaNemici fabbrica che crea nuovi avversari per ogni castello
+     * @param attaccoEroe strategia di attacco dell'eroe
+     * @param attaccoNemici strategia di attacco dei nemici
+     * @param fabbricaRegolaCura fabbrica di una nuova regola di cura per ciascun castello
+     * @throws NullPointerException se almeno uno tra {@code eroe}, {@code castelli}, {@code fabbricaNemici},
+     *     {@code attaccoEroe}, {@code attaccoNemici}, {@code fabbricaRegolaCura} è {@code null}
+     * @throws IllegalArgumentException se la sequenza dei castelli è vuota o contiene null
+     */
     public Partita(
             Eroe eroe,
             List<Castello> castelli,
@@ -70,11 +90,22 @@ public final class Partita {
         );
     }
 
+    /**
+     * Avvia la partita dal primo castello della campagna.
+     *
+     * @throws IllegalStateException se la partita è già iniziata o l’eroe è sconfitto
+     */
     public void inizia() {
         iniziaDa(0);
     }
 
-    /** Avvia una partita da un castello specifico, per consentire la ripresa della progressione. */
+    /**
+     * Avvia la partita dal castello indicato, ricostituendo vita, bonus e ricarica dell’eroe.
+     *
+     * @param indice indice nella sequenza originale, a partire da zero
+     * @throws IllegalArgumentException se l’indice iniziale non identifica un castello della campagna
+     * @throws IllegalStateException se la partita è già iniziata o l’eroe è sconfitto
+     */
     public void iniziaDa(int indice) {
         if (stato != StatoPartita.NON_INIZIATA) {
             throw new IllegalStateException("La partita è già iniziata");
@@ -86,8 +117,10 @@ public final class Partita {
     }
 
     /**
-     * Passa al castello successivo solo dopo la vittoria. Se non restano
-     * castelli, la partita viene marcata come completata.
+     * Avanza solo dopo una vittoria; completa la campagna se non rimangono castelli, altrimenti prepara una nuova
+     * battaglia.
+     *
+     * @throws IllegalStateException se la partita non è in corso o la battaglia corrente non è stata vinta
      */
     public void avanzaAlProssimoCastello() {
         verificaPartitaInCorso();
@@ -104,6 +137,11 @@ public final class Partita {
         avviaCastello(prossimoIndice);
     }
 
+    /**
+     * Restituisce la fase della partita, rilevando anche la sconfitta nella battaglia corrente.
+     *
+     * @return stato corrente della partita o del menu
+     */
     public StatoPartita stato() {
         if (stato == StatoPartita.IN_CORSO
                 && battagliaCorrente.stato() == StatoBattaglia.SCONFITTA) {
@@ -112,20 +150,43 @@ public final class Partita {
         return stato;
     }
 
+    /**
+     * Restituisce il castello attualmente affrontato.
+     *
+     * @return castello corrente
+     * @throws IllegalStateException se non esiste un castello corrente
+     */
     public Castello castelloCorrente() {
         verificaCastelloCorrenteDisponibile();
         return castelli.get(indiceCastelloCorrente);
     }
 
+    /**
+     * Restituisce la posizione del castello corrente nella campagna, a partire da uno.
+     *
+     * @return numero del castello a partire da uno
+     * @throws IllegalStateException se non esiste un castello corrente
+     */
     public int numeroCastelloCorrente() {
         verificaCastelloCorrenteDisponibile();
         return indiceCastelloCorrente + 1;
     }
 
+    /**
+     * Restituisce il numero totale di castelli della campagna.
+     *
+     * @return numero totale di castelli
+     */
     public int numeroCastelli() {
         return castelli.size();
     }
 
+    /**
+     * Restituisce il combattimento del castello corrente.
+     *
+     * @return battaglia corrente
+     * @throws IllegalStateException se non esiste un castello corrente
+     */
     public Battaglia battagliaCorrente() {
         verificaCastelloCorrenteDisponibile();
         return battagliaCorrente;

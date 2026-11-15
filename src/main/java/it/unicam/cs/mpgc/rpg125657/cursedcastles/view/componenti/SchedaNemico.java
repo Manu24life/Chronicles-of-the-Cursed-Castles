@@ -8,7 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-/** Il bersaglio conserva l'indice dello snapshot, anche dopo la sconfitta di altri nemici. */
+/**
+ * Il bersaglio conserva l'indice dello snapshot, anche dopo la sconfitta di altri nemici.
+ */
 public final class SchedaNemico extends Button {
     private static final PseudoClass SELEZIONATO = PseudoClass.getPseudoClass("selected");
     private final int indice;
@@ -18,6 +20,12 @@ public final class SchedaNemico extends Button {
     private final IllustrazioneNemico figura;
     private int puntiVitaPrecedenti = -1;
 
+    /**
+     * Inizializza un’istanza di {@code SchedaNemico} con le dipendenze ricevute.
+     *
+     * @param nemico nemico o snapshot del nemico da rappresentare
+     * @param seleziona azione invocata alla selezione della scheda
+     */
     public SchedaNemico(StatoNemico nemico, Runnable seleziona) {
         indice = nemico.indice();
         getStyleClass().add("enemy-card");
@@ -41,8 +49,19 @@ public final class SchedaNemico extends Button {
         aggiorna(nemico, false);
     }
 
+    /**
+     * Restituisce l’indice originale del nemico rappresentato.
+     *
+     * @return indice originale del nemico, a partire da zero
+     */
     public int indice() { return indice; }
 
+    /**
+     * Aggiorna nome, vita e selezione; riproduce il danno e disabilita la scheda quando il nemico è sconfitto.
+     *
+     * @param nemico nemico o snapshot del nemico da rappresentare
+     * @param selezionato indicatore di selezione del bersaglio
+     */
     public void aggiorna(StatoNemico nemico, boolean selezionato) {
         if (puntiVitaPrecedenti > nemico.puntiVita()) figura.riceviDanno(!nemico.vivo());
         puntiVitaPrecedenti = nemico.puntiVita();

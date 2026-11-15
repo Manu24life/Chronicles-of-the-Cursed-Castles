@@ -7,9 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** Implementazione che crea un nuovo mostro per ogni elemento del setup. */
+/**
+ * Rappresenta l’implementazione che crea un nuovo mostro per ogni elemento del setup.
+ */
 public final class FabbricaNemiciStandard implements FabbricaNemici {
 
+    /**
+     * {@inheritDoc}
+     * @throws NullPointerException se almeno uno tra {@code castello} è {@code null}
+     */
     @Override
     public List<Nemico> creaNemici(Castello castello) {
         Objects.requireNonNull(castello, "Il castello non può essere null");

@@ -6,7 +6,15 @@ import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.abilita.FabbricaAbil
 
 import java.util.Objects;
 
-/** Archetipo immutabile: due eroi della stessa classe condividono questi valori. */
+/**
+ * Rappresenta un archetipo immutabile: due eroi della stessa classe condividono questi valori.
+ *
+ * @param codice identificativo stabile usato per riconoscere la configurazione
+ * @param nome nome visualizzato
+ * @param statistiche statistiche base immutabili del personaggio
+ * @param fabbricaAbilita fabbrica di abilità indipendenti; può essere {@code null} per classi senza abilità
+ *     predefinita
+ */
 public record ClasseEroe(
         String codice,
         String nome,
@@ -14,11 +22,25 @@ public record ClasseEroe(
         FabbricaAbilitaEroe fabbricaAbilita
 ) {
 
-    /** Costruttore mantenuto per archetipi creati dinamicamente con abilità esplicita. */
+    /**
+     * Crea la configurazione ricavando il codice dal nome, senza assegnare una fabbrica di abilità.
+     * Richiede un’abilità esplicita al momento della creazione dell’eroe.
+     *
+     * @param nome nome visualizzato
+     * @param statistiche statistiche base immutabili del personaggio
+     */
     public ClasseEroe(String nome, Statistiche statistiche) {
         this(codiceDaNome(nome), nome, statistiche, null);
     }
 
+    /**
+     * Crea la configurazione ricavando il codice stabile dal nome fornito.
+     *
+     * @param nome nome visualizzato
+     * @param statistiche statistiche base immutabili del personaggio
+     * @param fabbricaAbilita fabbrica di abilità indipendenti; può essere {@code null} per classi senza abilità
+     *     predefinita
+     */
     public ClasseEroe(
             String nome,
             Statistiche statistiche,
@@ -27,6 +49,19 @@ public record ClasseEroe(
         this(codiceDaNome(nome), nome, statistiche, fabbricaAbilita);
     }
 
+    /**
+     * Inizializza i dati immutabili di {@code ClasseEroe}, verificando i vincoli dei componenti.
+     *
+     * @param codice identificativo stabile usato per riconoscere la configurazione
+     * @param nome nome visualizzato
+     * @param statistiche statistiche base immutabili del personaggio
+     * @param fabbricaAbilita fabbrica di abilità indipendenti; può essere {@code null} per classi senza abilità
+     *     predefinita
+     * @throws NullPointerException se almeno uno tra {@code codice}, {@code nome}, {@code statistiche} è
+     *     {@code null}
+     * @throws IllegalArgumentException se il nome è vuoto o il codice non rispetta il formato di lettere minuscole,
+     *     numeri e trattini
+     */
     public ClasseEroe {
         Objects.requireNonNull(codice, "Il codice della classe non può essere null");
         Objects.requireNonNull(nome, "Il nome della classe non può essere null");
@@ -40,6 +75,13 @@ public record ClasseEroe(
         nome = nome.strip();
     }
 
+    /**
+     * Crea una nuova abilità usando la fabbrica dell’archetipo.
+     *
+     * @return nuova abilità dell’archetipo
+     * @throws IllegalStateException se la classe non definisce una fabbrica di abilità
+     * @throws NullPointerException se la fabbrica restituisce null
+     */
     public AbilitaEroe creaAbilita() {
         if (fabbricaAbilita == null) {
             throw new IllegalStateException("La classe non definisce un'abilità predefinita");
@@ -50,10 +92,23 @@ public record ClasseEroe(
         );
     }
 
+    /**
+     * Verifica se l’archetipo specifica una fabbrica di abilità.
+     *
+     * @return {@code true} se è presente una fabbrica di abilità
+     */
     public boolean haAbilitaPredefinita() {
         return fabbricaAbilita != null;
     }
 
+    /**
+     * Verifica se l’abilità ha la stessa classe concreta di quella predefinita; accetta ogni abilità quando manca
+     * una fabbrica.
+     *
+     * @param abilita abilità assegnata all'eroe
+     * @return {@code true} se l’abilità è accettata dall’archetipo
+     * @throws NullPointerException se almeno uno tra {@code abilita} è {@code null}
+     */
     public boolean isAbilitaCompatibile(AbilitaEroe abilita) {
         Objects.requireNonNull(abilita, "L'abilità non può essere null");
         return !haAbilitaPredefinita() || creaAbilita().getClass().equals(abilita.getClass());
