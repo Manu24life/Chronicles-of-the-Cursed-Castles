@@ -89,8 +89,7 @@ Per costruire e avviare un runtime autonomo su Windows:
 ## Asset delle battaglie
 
 I sette PNG sono incorporati nelle risorse del package dell'applicazione, sotto `grafica`:
-quattro sprite trasparenti (`nemici`) e tre panorami (`scenari`). Sono asset originali generati
-con lo strumento immagini integrato, usando il riferimento visivo fornito per lo stile.
+quattro sprite trasparenti (`nemici`) e tre panorami (`scenari`). 
 Il file `grafica/README.md` ne descrive uso e provenienza.
 Gli asset sono stati realizzati inizialmente in Figma insieme allo strumento immagini integrato prendendo spunto dal noto gioco Fear & Hunger.
 
