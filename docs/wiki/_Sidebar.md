@@ -1,6 +1,5 @@
 **[Chronicles of the Cursed Castles](Home)**
 
-- [Requisiti e Traccia](Requisiti-e-Traccia)
 - [Funzionalità](Funzionalita)
 - [Architettura](Architettura)
 - [Responsabilità delle Classi](Responsabilita-delle-Classi)
