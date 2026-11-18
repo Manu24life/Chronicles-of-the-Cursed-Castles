@@ -19,7 +19,7 @@ public class TipiMostro {
     );
     /** Definisce le statistiche base del vampiro. */
     public static final TipoMostro VAMPIRO = new TipoMostro(
-            "vampiro", "Vampiro", new Statistiche(80, 26, 7)
+            "vampiro", "Vampiro", new Statistiche(70, 26, 7)
     );
     /** Definisce le statistiche base del drago. */
     public static final TipoMostro DRAGO = new TipoMostro(
