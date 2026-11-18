@@ -9,9 +9,11 @@
 | `BonusStatistiche` e `ModificatoreStatistiche` | Accumulare e descrivere bonus percentuali separati dalle statistiche base. |
 | `Eroe` | Definire il contratto dell'eroe, inclusi abilità, avanzamento della ricarica e preparazione del castello. |
 | `EroeGiocabile` | Comporre personaggio, classe, abilità e bonus per l'eroe concreto. |
-| `ClasseEroe` e `ClassiEroe` | Descrivere una classe e fornire il catalogo iniziale. |
+| `ClasseEroe` | Descrivere una classe giocabile con codice, nome, statistiche base e fabbrica opzionale dell'abilità. |
+| `ConfigurazioneEroe` | Definire Mago e Cavaliere, esporre il catalogo immutabile delle classi predefinite e consentire la ricerca per codice. |
 | `FabbricaEroiStandard` | Creare un eroe con una nuova istanza dell'abilità della classe. |
-| `TipoMostro` e `TipiMostro` | Descrivere e catalogare le configurazioni dei mostri. |
+| `TipoMostro` | Descrivere un tipo di mostro con codice, nome e statistiche base. |
+| `ConfigurazioneMostro` | Definire Scheletro, Orco, Vampiro e Drago come tipi predefiniti della campagna. |
 | `Mostro` | Realizzare un nemico con le statistiche del suo tipo. |
 | `Castello` e `ConfigurazioneNemici` | Descrivere un castello e le quantità dei tipi di nemico. |
 | `Castelli` | Fornire la sequenza iniziale dei tre castelli e la ricerca per codice. |

@@ -14,7 +14,7 @@ import java.util.Optional;
  * Rappresenta il catalogo iniziale; in futuro può essere sostituito da un repository persistente.
  */
 @UtilityClass
-public class ClassiEroe {
+public class ConfigurazioneEroe {
 
     /** Configura il mago e genera una nuova abilità di assorbimento magico per ogni eroe. */
     public static final ClasseEroe MAGO = new ClasseEroe(

@@ -19,7 +19,7 @@ class AbilitaEroeTest {
 
     @Test
     void ilMagoInfliggeDannoECuraIlTrentaPercentoDellaVitaMassima() {
-        Eroe mago = fabbricaEroi.crea("Merlino", ClassiEroe.MAGO);
+        Eroe mago = fabbricaEroi.crea("Merlino", ConfigurazioneEroe.MAGO);
         Mostro bersaglio = creaBersaglio();
         mago.subisciDanno(30);
 
@@ -37,7 +37,7 @@ class AbilitaEroeTest {
     void ilCavaliereAccumulaBonusPermanentiInModoAdditivo() {
         Eroe cavaliere = fabbricaEroi.crea(
                 "Lancillotto",
-                ClassiEroe.CAVALIERE,
+                ConfigurazioneEroe.CAVALIERE,
                 new TempraDelCavaliere(new RicaricaATurni(1, 0))
         );
         Mostro bersaglio = creaBersaglio();
@@ -60,7 +60,7 @@ class AbilitaEroeTest {
     void unAbilitaInRicaricaNonVieneApplicataDiNuovo() {
         Eroe cavaliere = fabbricaEroi.crea(
                 "Lancillotto",
-                ClassiEroe.CAVALIERE,
+                ConfigurazioneEroe.CAVALIERE,
                 new TempraDelCavaliere(new RicaricaATurni(2, 0))
         );
         Mostro bersaglio = creaBersaglio();
@@ -76,8 +76,8 @@ class AbilitaEroeTest {
 
     @Test
     void eroiDiversiNonCondividonoLoStatoDellaRicarica() {
-        Eroe primo = fabbricaEroi.crea("Primo", ClassiEroe.MAGO);
-        Eroe secondo = fabbricaEroi.crea("Secondo", ClassiEroe.MAGO);
+        Eroe primo = fabbricaEroi.crea("Primo", ConfigurazioneEroe.MAGO);
+        Eroe secondo = fabbricaEroi.crea("Secondo", ConfigurazioneEroe.MAGO);
 
         primo.abilita().usa(primo, creaBersaglio());
 

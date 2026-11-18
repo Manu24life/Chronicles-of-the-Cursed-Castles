@@ -31,7 +31,7 @@ Entrambe le abilità iniziano disponibili. Dopo l'uso la ricarica è impostata a
 | --- | ---: | ---: | ---: |
 | Scheletro | 35 | 14 | 2 |
 | Orco | 65 | 20 | 5 |
-| Vampiro | 80 | 26 | 7 |
+| Vampiro | 70 | 26 | 7 |
 | Drago | 320 | 30 | 12 |
 
 Ogni ingresso in un castello crea nuove istanze degli avversari. I tipi di mostro definiscono statistiche e identità; i nemici usano l'attacco configurato per la battaglia.
@@ -79,4 +79,4 @@ Il checkpoint conserva nome, codice della classe e codici dei castelli completat
 
 Inventario, equipaggiamento, esplorazione libera, dialoghi narrativi, audio e impostazioni persistenti non sono implementati. Le proposte relative a queste funzionalità sono in [Miglioramenti Futuri](Miglioramenti-Futuri).
 
-Fonti nel codice: [catalogo eroi](https://github.com/Manu24life/Chronicles-of-the-Cursed-Castles/blob/main/src/main/java/it/unicam/cs/mpgc/rpg125657/cursedcastles/model/eroe/ClassiEroe.java), [castelli](https://github.com/Manu24life/Chronicles-of-the-Cursed-Castles/blob/main/src/main/java/it/unicam/cs/mpgc/rpg125657/cursedcastles/model/castello/Castelli.java), [mostri](https://github.com/Manu24life/Chronicles-of-the-Cursed-Castles/blob/main/src/main/java/it/unicam/cs/mpgc/rpg125657/cursedcastles/model/mostro/TipiMostro.java) e [regole della battaglia](https://github.com/Manu24life/Chronicles-of-the-Cursed-Castles/blob/main/src/main/java/it/unicam/cs/mpgc/rpg125657/cursedcastles/model/combattimento/Battaglia.java).
+I dati e le regole sono definiti in [ConfigurazioneEroe](https://github.com/Manu24life/Chronicles-of-the-Cursed-Castles/blob/main/src/main/java/it/unicam/cs/mpgc/rpg125657/cursedcastles/model/eroe/ConfigurazioneEroe.java), [ConfigurazioneMostro](https://github.com/Manu24life/Chronicles-of-the-Cursed-Castles/blob/main/src/main/java/it/unicam/cs/mpgc/rpg125657/cursedcastles/model/mostro/ConfigurazioneMostro.java), [Castelli](https://github.com/Manu24life/Chronicles-of-the-Cursed-Castles/blob/main/src/main/java/it/unicam/cs/mpgc/rpg125657/cursedcastles/model/castello/Castelli.java) e [Battaglia](https://github.com/Manu24life/Chronicles-of-the-Cursed-Castles/blob/main/src/main/java/it/unicam/cs/mpgc/rpg125657/cursedcastles/model/combattimento/Battaglia.java).

@@ -10,7 +10,7 @@ import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.castello.FabbricaNemiciSt
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.RicaricaATurni;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.StatoBattaglia;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.ClasseEroe;
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.ClassiEroe;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.ConfigurazioneEroe;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.Eroe;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.FabbricaEroiStandard;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.abilita.TempraDelCavaliere;
@@ -64,7 +64,7 @@ class ServizioProgressioneTest {
     @Test
     void salvaClasseNomeEPiuCastelliSenzaDuplicati() {
         ServizioProgressione servizio = new ServizioProgressione(repository);
-        Partita partita = servizio.nuovaPartita("Lancillotto", ClassiEroe.CAVALIERE, NEMICI_DI_TEST);
+        Partita partita = servizio.nuovaPartita("Lancillotto", ConfigurazioneEroe.CAVALIERE, NEMICI_DI_TEST);
 
         vinciBattaglia(partita);
         servizio.registraVittoria(partita);
@@ -83,11 +83,11 @@ class ServizioProgressioneTest {
     @Test
     void unaNuovaPartitaCancellaLaProgressionePrecedente() {
         ServizioProgressione servizio = new ServizioProgressione(repository);
-        Partita partita = servizio.nuovaPartita("Lancillotto", ClassiEroe.CAVALIERE, NEMICI_DI_TEST);
+        Partita partita = servizio.nuovaPartita("Lancillotto", ConfigurazioneEroe.CAVALIERE, NEMICI_DI_TEST);
         vinciBattaglia(partita);
         servizio.registraVittoria(partita);
 
-        servizio.nuovaPartita("Merlino", ClassiEroe.MAGO, new FabbricaNemiciStandard());
+        servizio.nuovaPartita("Merlino", ConfigurazioneEroe.MAGO, new FabbricaNemiciStandard());
 
         ProgressiPartita caricati = servizio.carica().orElseThrow();
         assertEquals("Merlino", caricati.nomeEroe());
@@ -98,7 +98,7 @@ class ServizioProgressioneTest {
     @Test
     void ricostruisceDalPrimoCastelloIncompletoSenzaStatoTemporaneo() {
         ServizioProgressione servizio = new ServizioProgressione(repository);
-        Partita originale = servizio.nuovaPartita("Lancillotto", ClassiEroe.CAVALIERE, NEMICI_DI_TEST);
+        Partita originale = servizio.nuovaPartita("Lancillotto", ConfigurazioneEroe.CAVALIERE, NEMICI_DI_TEST);
         Eroe eroeOriginale = originale.eroe();
         eroeOriginale.subisciDanno(30);
         eroeOriginale.applicaBonus(new ModificatoreStatistiche(30, 40));
@@ -126,9 +126,9 @@ class ServizioProgressioneTest {
     @Test
     void rifiutaIlCompletamentoFuoriOrdine() {
         ServizioProgressione servizio = new ServizioProgressione(repository);
-        servizio.nuovaPartita("Merlino", ClassiEroe.MAGO, NEMICI_DI_TEST);
+        servizio.nuovaPartita("Merlino", ConfigurazioneEroe.MAGO, NEMICI_DI_TEST);
         Partita fuoriOrdine = new Partita(
-                new FabbricaEroiStandard().crea("Merlino", ClassiEroe.MAGO),
+                new FabbricaEroiStandard().crea("Merlino", ConfigurazioneEroe.MAGO),
                 Castelli.tutti(),
                 NEMICI_DI_TEST
         );
@@ -145,7 +145,7 @@ class ServizioProgressioneTest {
     @Test
     void rifiutaLaRegistrazionePrimaDellaVittoriaSenzaModificareIProgressi() {
         ServizioProgressione servizio = new ServizioProgressione(repository);
-        Partita partita = servizio.nuovaPartita("Merlino", ClassiEroe.MAGO, NEMICI_DI_TEST);
+        Partita partita = servizio.nuovaPartita("Merlino", ConfigurazioneEroe.MAGO, NEMICI_DI_TEST);
 
         assertThrows(IllegalStateException.class, () -> servizio.registraVittoria(partita));
         assertTrue(servizio.carica().orElseThrow().codiciCastelliCompletati().isEmpty());

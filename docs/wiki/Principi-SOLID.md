@@ -19,7 +19,7 @@ Per esempio, modificare i colori dei pulsanti richiede un intervento nella vista
 
 Le configurazioni `ClasseEroe`, `TipoMostro` e `Castello` descrivono i contenuti del gioco. Aggiungere un nemico con statistiche diverse può riutilizzare `Mostro`, senza modificare il calcolo del danno.
 
-L'estensione richiede comunque la registrazione nel catalogo e, quando necessario, nuove risorse o presentazioni. La configurazione di produzione usa i cataloghi statici `ClassiEroe` e `Castelli`.
+Per estendere la configurazione predefinita si registrano le classi giocabili in `ConfigurazioneEroe` e si definiscono i tipi di nemico in `ConfigurazioneMostro`. `Castelli` stabilisce dove e in quale quantità compaiono i nemici. Le istruzioni per aggiungere contenuti e risorse sono in [Estendibilità](Estendibilita).
 
 ## Liskov Substitution Principle
 

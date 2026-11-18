@@ -79,7 +79,7 @@ class InterfacciaJavaFxTest {
 
     @Test void caricaLeSchermateConICataloghiRealiEGeneraAnteprime() throws Exception {
         fx(() -> {
-            StatoMenu menu = new StatoMenu(ClassiEroe.tutte().stream().map(c -> new ClasseDisponibile(
+            StatoMenu menu = new StatoMenu(ConfigurazioneEroe.tutte().stream().map(c -> new ClasseDisponibile(
                     c.codice(), c.nome(), c.statistiche().puntiVitaMassimi(), c.statistiche().attacco(),
                     c.statistiche().difesa())).toList(), Optional.empty());
             viste.mostra("menu-view.fxml", new SchermataMenu(coordinatore)).mostra(menu, false);
@@ -97,7 +97,7 @@ class InterfacciaJavaFxTest {
         cattura("menu-compatta");
         fx(() -> {
             viste.mostra("nuova-partita-view.fxml", new SchermataNuovaPartita(coordinatore))
-                    .mostra(ClassiEroe.tutte().stream().map(c -> new ClasseDisponibile(c.codice(), c.nome(),
+                    .mostra(ConfigurazioneEroe.tutte().stream().map(c -> new ClasseDisponibile(c.codice(), c.nome(),
                             c.statistiche().puntiVitaMassimi(), c.statistiche().attacco(), c.statistiche().difesa())).toList());
             assertTrue(pulsante("inizia").isDisabled());
             ((TextField) nodo("nome")).setText("Elda");
@@ -107,7 +107,7 @@ class InterfacciaJavaFxTest {
             return null;
         });
         cattura("creazione");
-        for (ClasseEroe classe : ClassiEroe.tutte()) {
+        for (ClasseEroe classe : ConfigurazioneEroe.tutte()) {
             ServizioGioco gioco = new ServizioGioco(new ServizioProgressione(new RepositoryTest()), new FabbricaNemiciStandard());
             gioco.nuovaPartita("Elda", classe.codice());
             BattagliaController controller = new BattagliaController(gioco);

@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg125657.cursedcastles.model.castello;
 
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.mostro.TipiMostro;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.mostro.ConfigurazioneMostro;
 import lombok.experimental.UtilityClass;
 
 import java.util.List;
@@ -15,18 +15,18 @@ public class Castelli {
 
     /** Configura il primo castello, popolato da tre scheletri. */
     public static final Castello OSSA = new Castello("ossa", "Castello delle Ossa", List.of(
-            new ConfigurazioneNemici(TipiMostro.SCHELETRO, 3)
+            new ConfigurazioneNemici(ConfigurazioneMostro.SCHELETRO, 3)
     ));
 
     /** Configura il secondo castello, popolato da due orchi e un vampiro. */
     public static final Castello FERRO = new Castello("ferro", "Fortezza di Ferro", List.of(
-            new ConfigurazioneNemici(TipiMostro.ORCO, 2),
-            new ConfigurazioneNemici(TipiMostro.VAMPIRO, 1)
+            new ConfigurazioneNemici(ConfigurazioneMostro.ORCO, 2),
+            new ConfigurazioneNemici(ConfigurazioneMostro.VAMPIRO, 1)
     ));
 
     /** Configura l’ultimo castello, presidiato dal drago. */
     public static final Castello MALEDIZIONE = new Castello("maledizione", "Rocca della Maledizione", List.of(
-            new ConfigurazioneNemici(TipiMostro.DRAGO, 1)
+            new ConfigurazioneNemici(ConfigurazioneMostro.DRAGO, 1)
     ));
 
     private static final List<Castello> TUTTI = List.of(OSSA, FERRO, MALEDIZIONE);

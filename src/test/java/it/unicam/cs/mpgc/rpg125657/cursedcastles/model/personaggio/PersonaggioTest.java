@@ -2,7 +2,7 @@ package it.unicam.cs.mpgc.rpg125657.cursedcastles.model.personaggio;
 
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.Eroe;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.FabbricaEroiStandard;
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.ClassiEroe;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.ConfigurazioneEroe;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +18,7 @@ class PersonaggioTest {
         eroe.subisciDanno(30);
         eroe.recuperaPuntiVita(10);
 
-        assertEquals(ClassiEroe.MAGO.statistiche(), eroe.statisticheBase());
+        assertEquals(ConfigurazioneEroe.MAGO.statistiche(), eroe.statisticheBase());
         assertEquals(60, eroe.puntiVita());
     }
 
@@ -40,6 +40,6 @@ class PersonaggioTest {
     }
 
     private Eroe creaMago() {
-        return new FabbricaEroiStandard().crea("Merlino", ClassiEroe.MAGO);
+        return new FabbricaEroiStandard().crea("Merlino", ConfigurazioneEroe.MAGO);
     }
 }

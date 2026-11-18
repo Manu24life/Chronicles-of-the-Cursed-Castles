@@ -43,6 +43,8 @@ La freccia dal coordinatore al repository rappresenta il collegamento iniziale d
 
 `ServizioGioco` coordina la sessione attiva e il salvataggio delle vittorie. `ServizioProgressione` valida i riferimenti persistiti, ricostruisce l'eroe e avvia la campagna dal primo castello incompleto.
 
+Nella configurazione predefinita, `ServizioProgressione` usa le classi giocabili di `ConfigurazioneEroe.tutte()` e la sequenza della campagna di `Castelli.tutti()`. In `Castelli`, le voci `ConfigurazioneNemici` associano i tipi di `ConfigurazioneMostro` alle quantità previste per ciascun castello. `FabbricaNemiciStandard` usa queste voci per creare gli avversari all'ingresso nel castello.
+
 Il modello non dipende da JavaFX o dalle entità Hibernate. `ProgressiRepository` è il contratto che collega i servizi ai dati persistenti.
 
 ## Controller e snapshot

@@ -5,7 +5,7 @@ import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.castello.Castello;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.castello.FabbricaNemici;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.StatoBattaglia;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.ClasseEroe;
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.ClassiEroe;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.ConfigurazioneEroe;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.Eroe;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.FabbricaEroi;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.FabbricaEroiStandard;
@@ -35,7 +35,7 @@ public final class ServizioProgressione {
      * @throws NullPointerException se uno degli argomenti è null
      */
     public ServizioProgressione(ProgressiRepository repository) {
-        this(repository, new FabbricaEroiStandard(), ClassiEroe.tutte(), Castelli.tutti());
+        this(repository, new FabbricaEroiStandard(), ConfigurazioneEroe.tutte(), Castelli.tutti());
     }
 
     /**

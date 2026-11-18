@@ -6,8 +6,8 @@ Le proposte di questa pagina non sono funzionalità già implementate né impegn
 
 | Proposta | Intervento previsto |
 | --- | --- |
-| Nuove classi e abilità | Estendere il catalogo `ClasseEroe`, creare abilità e aggiungere test e presentazioni. |
-| Nuovi mostri e castelli | Aggiungere configurazioni, aggiornare la campagna e preparare le risorse grafiche. |
+| Nuove classi e abilità | Aggiungere voci in `ConfigurazioneEroe`, creare abilità e aggiungere test e presentazioni. |
+| Nuovi mostri e castelli | Definire i tipi in `ConfigurazioneMostro`, aggiornare la campagna in `Castelli` e preparare le risorse grafiche. |
 | [Comportamenti specifici dei nemici](#comportamenti-specifici-dei-nemici) | Introdurre una politica per scegliere le azioni di ciascun nemico. |
 | [Bilanciamento](#bilanciamento) | Valutare statistiche, efficacia delle cure e durata degli scontri tramite casi riproducibili. |
 | Inventario ed equipaggiamento | Modellare oggetti, regole di utilizzo e modificatori, poi integrare persistenza e vista. |

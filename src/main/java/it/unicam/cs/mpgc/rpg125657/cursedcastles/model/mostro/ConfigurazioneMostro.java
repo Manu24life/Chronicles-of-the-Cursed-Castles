@@ -7,7 +7,7 @@ import lombok.experimental.UtilityClass;
  * Rappresenta i tipi di nemico disponibili nella prima configurazione del gioco.
  */
 @UtilityClass
-public class TipiMostro {
+public class ConfigurazioneMostro {
 
     /** Definisce le statistiche base dello scheletro. */
     public static final TipoMostro SCHELETRO = new TipoMostro(

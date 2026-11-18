@@ -46,7 +46,7 @@ erDiagram
 
 `nome_eroe` è obbligatorio e lungo al massimo 100 caratteri; i codici hanno lunghezza massima 64 nel mapping. La coppia `(salvataggio_id, codice_castello)` è univoca. Il campo `versione`, annotato con `@Version`, permette a Hibernate di rilevare aggiornamenti concorrenti dello slot.
 
-Il codice della classe e quelli dei castelli fanno riferimento ai cataloghi applicativi, senza tabelle anagrafiche separate. `SalvataggioEntity` è interna al package di persistenza e converte i dati nel record immutabile del dominio.
+Il codice della classe e quelli dei castelli fanno riferimento ai cataloghi usati da `ServizioProgressione`, forniti per impostazione predefinita da `ConfigurazioneEroe.tutte()` e `Castelli.tutti()`. `SalvataggioEntity` è interna al package di persistenza e converte i dati nel record immutabile del dominio.
 
 ## Flusso di salvataggio
 

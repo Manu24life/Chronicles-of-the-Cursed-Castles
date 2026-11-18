@@ -7,7 +7,7 @@ import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.castello.FabbricaNemiciSt
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.mostro.Mostro;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.mostro.TipoMostro;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.personaggio.Statistiche;
-import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.ClassiEroe;
+import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.ConfigurazioneEroe;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.FabbricaEroi;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.FabbricaEroiStandard;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.partita.Partita;
@@ -29,7 +29,7 @@ class ServizioGiocoTest {
 
     private ServizioGioco gioco(FabbricaEroi eroi, FabbricaNemici fabbricaNemici) {
         return new ServizioGioco(new ServizioProgressione(repository, eroi,
-                ClassiEroe.tutte(), Castelli.tutti()), fabbricaNemici);
+                ConfigurazioneEroe.tutte(), Castelli.tutti()), fabbricaNemici);
     }
 
     @Test

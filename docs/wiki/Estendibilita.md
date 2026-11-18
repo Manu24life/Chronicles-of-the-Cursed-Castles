@@ -4,15 +4,15 @@
 
 Una classe è una configurazione `ClasseEroe` con codice stabile, nome, statistiche base e `FabbricaAbilitaEroe`.
 
-Per aggiungerla occorre implementare l'eventuale nuova abilità, registrare la configurazione nel catalogo e aggiungere i test del comportamento. Il menu legge le classi esposte dal servizio e può quindi mostrare una nuova configurazione senza introdurre una nuova sottoclasse di `Personaggio`.
+Per aggiungerla, definisci un nuovo `ClasseEroe` in `ConfigurazioneEroe` e includilo nella lista `TUTTE`, restituita da `tutte()`. Implementa l'eventuale nuova abilità e aggiungi i test del comportamento. Il menu ricava le classi selezionabili da `ServizioProgressione` tramite il controller.
 
 Ogni fabbrica deve creare un'abilità distinta per ogni eroe, con una propria ricarica. Se la nuova classe richiede una presentazione specifica, vanno aggiornate anche la vista e le relative risorse.
 
 ## Aggiungere nemici e castelli
 
-Un nuovo `TipoMostro` definisce codice, nome e statistiche. Un `Castello` contiene una lista di `ConfigurazioneNemici`, ciascuna con tipo e quantità.
+Definisci il nuovo `TipoMostro` in `ConfigurazioneMostro` con codice, nome e statistiche base. Per inserirlo nella campagna, aggiungi al castello interessato in `Castelli` una voce `ConfigurazioneNemici` con il tipo e la quantità. Se aggiungi un castello, inseriscilo nella sequenza `TUTTI`, restituita da `tutti()`.
 
-La fabbrica standard può creare un nuovo mostro configurato senza modificare l'algoritmo di attacco. Per inserirlo nella campagna si aggiorna il catalogo dei castelli; per visualizzarlo con una grafica dedicata si aggiornano `RisorseBattaglia`, i componenti interessati e gli asset.
+`FabbricaNemiciStandard` crea le istanze di `Mostro` a partire da queste voci. Per mostrare il nuovo tipo con una grafica dedicata, aggiorna `RisorseBattaglia`, i componenti interessati e gli asset.
 
 I mostri attuali condividono la regola di attacco della battaglia. Comportamenti diversi per singolo nemico richiederebbero un ulteriore punto di estensione nella scelta delle azioni avversarie.
 
