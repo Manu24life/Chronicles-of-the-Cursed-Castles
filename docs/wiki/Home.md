@@ -10,18 +10,18 @@ Il progetto separa regole di gioco, servizi applicativi, controller, interfaccia
 
 ## Indice della wiki
 
-1. [Funzionalità](Funzionalita)
-2. [Architettura](Architettura)
-3. [Responsabilità delle Classi](Responsabilita-delle-Classi)
-4. [Interfacce e Astrazioni](Interfacce-e-Astrazioni)
-5. [Principi SOLID](Principi-SOLID)
-6. [Persistenza dei Dati](Persistenza-dei-Dati)
-7. [Interfaccia Grafica](Interfaccia-Grafica)
-8. [Estendibilità](Estendibilita)
-9. [Problemi e Soluzioni](Problemi-e-Soluzioni)
-10. [Uso dell'IA](Uso-dell-AI)
-11. [Miglioramenti Futuri](Miglioramenti-Futuri)
-12. [Strumenti e Metodologie](Strumenti-e-Metodologie)
+📌 [Funzionalità](Funzionalita)\
+🏗️ [Architettura](Architettura)\
+🧩 [Responsabilità delle Classi](Responsabilita-delle-Classi)\
+🔌 [Interfacce e Astrazioni](Interfacce-e-Astrazioni)\
+📐 [Principi SOLID](Principi-SOLID)\
+💾 [Persistenza dei Dati](Persistenza-dei-Dati)\
+🎨 [Interfaccia Grafica](Interfaccia-Grafica)\
+➕ [Estendibilità](Estendibilita)\
+⚠️ [Problemi e Soluzioni](Problemi-e-Soluzioni)\
+🤖 [Uso dell'IA](Uso-dell-AI)\
+🚀 [Miglioramenti Futuri](Miglioramenti-Futuri)\
+🛠️ [Strumenti e Metodologie](Strumenti-e-Metodologie)
 
 ## Avvio rapido
 
