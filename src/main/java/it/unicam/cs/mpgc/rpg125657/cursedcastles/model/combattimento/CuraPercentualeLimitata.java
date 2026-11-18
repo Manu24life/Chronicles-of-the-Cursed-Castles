@@ -9,8 +9,8 @@ import java.util.Objects;
  */
 public final class CuraPercentualeLimitata implements RegolaCura {
 
-    /** Definisce il recupero standard del 5% della vita massima. */
-    public static final int PERCENTUALE_STANDARD = 5;
+    /** Definisce il recupero standard del 25% della vita massima. */
+    public static final int PERCENTUALE_STANDARD = 25;
     /** Definisce i due utilizzi standard disponibili per castello. */
     public static final int UTILIZZI_STANDARD = 2;
 
@@ -19,7 +19,7 @@ public final class CuraPercentualeLimitata implements RegolaCura {
     private int utilizziEffettuati;
 
     /**
-     * Configura una cura del 5% dei punti vita massimi, utilizzabile due volte per castello.
+     * Configura una cura del 25% dei punti vita massimi, utilizzabile due volte per castello.
      */
     public CuraPercentualeLimitata() {
         this(PERCENTUALE_STANDARD, UTILIZZI_STANDARD);
@@ -67,19 +67,17 @@ public final class CuraPercentualeLimitata implements RegolaCura {
                     "Le cure disponibili per questo castello sono esaurite"
             );
         }
-        if (eroe.puntiVita() == eroe.statisticheBase().puntiVitaMassimi()) {
+        int vitaPrima = eroe.puntiVita();
+        int vitaMassima = eroe.statisticheBase().puntiVitaMassimi();
+        if (vitaPrima == vitaMassima) {
             return RisultatoAzione.fallimento(
                     EsitoAzione.VITA_GIA_PIENA,
                     "L'eroe ha già tutti i punti vita"
             );
         }
 
-        int curaRichiesta = Math.max(
-                1,
-                eroe.statisticheBase().puntiVitaMassimi() * percentuale / 100
-        );
-        int vitaPrima = eroe.puntiVita();
-        eroe.recuperaPuntiVita(curaRichiesta);
+        int curaRichiesta = Math.max(1, (int) ((long) vitaMassima * percentuale / 100));
+        eroe.recuperaPuntiVita(Math.min(curaRichiesta, vitaMassima - vitaPrima));
         int curaEffettiva = eroe.puntiVita() - vitaPrima;
         utilizziEffettuati++;
 

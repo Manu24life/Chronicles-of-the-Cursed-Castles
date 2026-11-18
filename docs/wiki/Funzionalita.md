@@ -67,7 +67,7 @@ stateDiagram-v2
 
 ## Cure e passaggio tra castelli
 
-La cura standard è utilizzabile **due volte per castello** e recupera il **5% della vita massima**, senza superarla: fino a 4 punti per il Mago o 6 per il Cavaliere. Il consumo avviene solo se la cura riesce.
+La cura standard è utilizzabile **due volte per castello** e recupera il **25% della vita massima**, fino al limite dei punti vita mancanti. Il Mago può recuperare fino a 20 punti vita e il Cavaliere fino a 30. Il consumo avviene solo se la cura riesce.
 
 All'ingresso in un nuovo castello vengono ripristinati la vita massima, le due cure e la disponibilità iniziale dell'abilità. I bonus accumulati vengono azzerati.
 

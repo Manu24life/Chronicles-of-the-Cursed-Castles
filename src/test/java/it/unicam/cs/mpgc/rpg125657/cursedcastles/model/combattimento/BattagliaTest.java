@@ -49,11 +49,16 @@ class BattagliaTest {
 
         RisultatoAzione primaCura = battaglia.curaEroe();
         assertTrue(primaCura.riuscita());
-        assertEquals(5, primaCura.puntiVitaRecuperati());
+        assertEquals(7, primaCura.puntiVitaRecuperati());
+        assertEquals(100, eroe.puntiVita());
         assertEquals(1, battaglia.cureRimanenti());
         battaglia.eseguiTurnoNemico();
 
-        assertTrue(battaglia.curaEroe().riuscita());
+        eroe.subisciDanno(25);
+        RisultatoAzione secondaCura = battaglia.curaEroe();
+        assertTrue(secondaCura.riuscita());
+        assertEquals(25, secondaCura.puntiVitaRecuperati());
+        assertEquals(93, eroe.puntiVita());
         assertEquals(0, battaglia.cureRimanenti());
         battaglia.eseguiTurnoNemico();
 

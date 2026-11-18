@@ -206,7 +206,7 @@ class InterfacciaJavaFxTest {
             pulsante("abilita").fire();
             return null;
         });
-        attendi(() -> "Punti vita: 74 su 80".equals(nodo("vitaEroe").getAccessibleText()));
+        attendi(() -> "Punti vita: 70 su 80".equals(nodo("vitaEroe").getAccessibleText()));
         fx(() -> {
             assertTrue(nodo("nemico-2").getAccessibleText().contains("27 punti vita, bersaglio"));
             assertTrue(nodo("nemico-0").getAccessibleText().contains("35 punti vita"));
@@ -214,8 +214,8 @@ class InterfacciaJavaFxTest {
             pulsante("cura").fire();
             return null;
         });
-        attendi(() -> "Punti vita: 72 su 80".equals(nodo("vitaEroe").getAccessibleText()));
-        fx(() -> { assertTrue(pulsante("cura").getText().contains("1 rimaste")); return null; });
+        attendi(() -> "Punti vita: 70 su 80".equals(nodo("vitaEroe").getAccessibleText())
+                && pulsante("cura").getText().contains("1 rimaste"));
     }
 
     @Test void usaLAbilitaPersonaleDelCavaliere() throws Exception {
