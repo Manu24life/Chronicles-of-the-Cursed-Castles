@@ -117,6 +117,16 @@ headless. I test usano repository in memoria o database dedicati, senza aprire l
 Report dei test: `build/reports/tests/test/index.html`. Le verifiche di layout producono
 anteprime PNG in `build/reports/ui`, anche alla risoluzione minima e per i tre castelli.
 
+## Uso dell'intelligenza artificiale
+
+Ho definito l'architettura, le regole del gioco e le scelte tecniche del progetto. Ho usato
+**Codex (GPT-6.1 Sol)** come supporto per costruttori, test, grafica, documentazione e soprattutto
+per il debug della persistenza. Ho usato **Claude Sonnet 5.5** per un secondo controllo della qualità
+del codice. Ho revisionato personalmente tutti i contenuti prodotti dall'IA prima di integrare
+quelli utili al progetto.
+
+Per i dettagli, consulta la pagina [Uso dell'IA nella wiki](docs/wiki/Uso-dell-AI.md).
+
 ## Ambito attuale
 
 La View rappresenta le funzionalità esistenti. Inventario, equipaggiamento, esplorazione libera,
