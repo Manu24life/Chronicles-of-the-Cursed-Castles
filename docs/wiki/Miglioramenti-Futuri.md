@@ -8,10 +8,29 @@ Le proposte di questa pagina non sono funzionalità già implementate né impegn
 | --- | --- |
 | Nuove classi e abilità | Estendere il catalogo `ClasseEroe`, creare abilità e aggiungere test e presentazioni. |
 | Nuovi mostri e castelli | Aggiungere configurazioni, aggiornare la campagna e preparare le risorse grafiche. |
-| Comportamenti specifici dei nemici | Introdurre una politica per scegliere le azioni di ciascun nemico. |
-| Bilanciamento | Valutare statistiche, efficacia delle cure e durata degli scontri tramite casi riproducibili. |
+| [Comportamenti specifici dei nemici](#comportamenti-specifici-dei-nemici) | Introdurre una politica per scegliere le azioni di ciascun nemico. |
+| [Bilanciamento](#bilanciamento) | Valutare statistiche, efficacia delle cure e durata degli scontri tramite casi riproducibili. |
 | Inventario ed equipaggiamento | Modellare oggetti, regole di utilizzo e modificatori, poi integrare persistenza e vista. |
 | Esplorazione e dialoghi | Introdurre stato di esplorazione, eventi e progressione narrativa. |
+
+## Comportamenti specifici dei nemici e bilanciamento
+
+### Comportamenti specifici dei nemici
+
+Ogni tipo di nemico potrebbe scegliere come agire in base allo stato dello scontro. La proposta mantiene la regola attuale di **un solo nemico in risposta per turno** e rende riconoscibili le mosse speciali con un segnale prima che abbiano effetto.
+
+| Nemico | Possibile comportamento |
+| --- | --- |
+| **Scheletro** | Alterna un attacco semplice a una guardia temporanea. Il giocatore può cambiare bersaglio mentre la guardia è attiva. |
+| **Orco** | Usa una risposta per preparare un colpo pesante. L’avviso dà al giocatore un turno per decidere se finirlo, curarsi o usare un’abilità. |
+| **Vampiro** | Quando ha poca vita, può recuperare una parte del danno inflitto. Un numero limitato di utilizzi evita che lo scontro si prolunghi eccessivamente. |
+| **Drago** | Sotto una soglia di vita passa a una seconda fase, alternando gli attacchi normali a un soffio annunciato in anticipo. |
+
+### Bilanciamento
+
+Il bilanciamento potrebbe partire da **scontri riproducibili con Mago e Cavaliere in ciascun castello**. Per ogni prova si registrerebbero turni impiegati, vita residua, cure consumate e utilizzi delle abilità. Nella Fortezza di Ferro sarebbe utile confrontare anche ordini diversi di eliminazione dei nemici, per verificare quanto la scelta del bersaglio incida sul risultato.
+
+Le prove partirebbero dalle regole attuali. Dopo aver introdotto un comportamento speciale, si ripeterebbero gli stessi scontri modificando **un parametro alla volta**, per esempio il danno del colpo caricato o la frequenza della cura del vampiro. L’obiettivo è lasciare a entrambe le classi più di una scelta praticabile e fare in modo che il giocatore possa reagire alle minacce annunciate.
 
 ## Salvataggi
 
