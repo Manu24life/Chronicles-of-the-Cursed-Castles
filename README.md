@@ -72,7 +72,6 @@ FXGL è integrato tramite `com.github.almasb:fxgl-core:25.0.1` (Java 25), usando
 e `AnimationBuilder` senza avviare una seconda `GameApplication`. JavaFX resta alla versione
 25.0.3; il modulo `javafx.media` soddisfa una dipendenza di FXGL Core, senza aggiungere audio
 al gioco. Le dipendenze Kotlin/Gluon necessarie vengono risolte da Gradle.
-Le regole di Model e Controller non sono state modificate.
 La configurazione jlink dichiara esplicitamente gli SPI Hibernate caricati mediante ServiceLoader;
 gli errori di collegamento o configurazione dei servizi vengono mostrati nell'interfaccia,
 senza lasciare l'indicatore di caricamento attivo indefinitamente.
