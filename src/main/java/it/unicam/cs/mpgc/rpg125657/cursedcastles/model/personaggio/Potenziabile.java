@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg125657.cursedcastles.model.personaggio;
 
 /**
- * Rappresenta la capacità di ricevere bonus permanenti e accumulabili.
+ * Rappresenta la capacità di accumulare e azzerare bonus percentuali alle statistiche.
  */
 public interface Potenziabile {
 

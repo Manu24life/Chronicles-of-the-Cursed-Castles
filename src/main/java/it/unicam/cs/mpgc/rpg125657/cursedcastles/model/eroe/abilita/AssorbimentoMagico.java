@@ -7,7 +7,9 @@ import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.combattimento.RisultatoAz
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.Eroe;
 
 /**
- * Infligge un danno magico lieve e cura il 30% dei punti vita massimi.
+ * Infligge fino a 8 danni magici, limitati ai punti vita residui del bersaglio.
+ * La cura richiesta è il 30% dei punti vita massimi dell'eroe, arrotondato per difetto.
+ * La cura effettiva è limitata ai punti vita mancanti e può essere zero.
  */
 public final class AssorbimentoMagico extends AbilitaConRicarica {
 

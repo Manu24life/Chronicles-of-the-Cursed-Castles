@@ -130,25 +130,36 @@ public final class ServizioGioco {
 
     /**
      * Esegue l’attacco dell’eroe contro il nemico selezionato.
+     * Se l'attacco conclude la battaglia con una vittoria, tenta di salvarla dopo aver applicato l'azione.
      *
      * @param indice indice nella sequenza originale, a partire da zero
      * @return esito dell’azione, con successo o motivo del fallimento e variazioni effettive di vita
      * @throws IllegalStateException se manca una partita attiva o il suo stato non consente il comando
+     * @throws IllegalArgumentException se l'indice non identifica un nemico vivo
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se il salvataggio fallisce dopo che
+     *     l'azione ha portato la battaglia alla vittoria
      */
     public RisultatoAzione attacca(int indice) { return esegui(b -> b.attacca(indice)); }
     /**
-     * Attiva l’abilità dell’eroe secondo i requisiti del bersaglio.
+     * Attiva l'abilità dell'eroe, usando l'indice solo se serve un bersaglio.
+     * Se l'abilità conclude la battaglia con una vittoria, tenta di salvarla dopo aver applicato l'azione.
      *
      * @param indice indice nella sequenza originale, a partire da zero
      * @return esito dell’azione, con successo o motivo del fallimento e variazioni effettive di vita
      * @throws IllegalStateException se manca una partita attiva o il suo stato non consente il comando
+     * @throws IllegalArgumentException se l'abilità richiede un bersaglio e l'indice non identifica un nemico vivo
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se il salvataggio fallisce dopo che
+     *     l'azione ha portato la battaglia alla vittoria
      */
     public RisultatoAzione usaAbilita(int indice) { return esegui(b -> b.usaAbilitaEroe(indice)); }
     /**
-     * Attiva l’abilità dell’eroe secondo i requisiti del bersaglio.
+     * Attiva l'abilità dell'eroe senza selezionare un bersaglio. Restituisce un fallimento se serve un nemico.
+     * Se l'abilità conclude la battaglia con una vittoria, tenta di salvarla dopo aver applicato l'azione.
      *
      * @return esito dell’azione, con successo o motivo del fallimento e variazioni effettive di vita
      * @throws IllegalStateException se manca una partita attiva o il suo stato non consente il comando
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se il salvataggio fallisce dopo che
+     *     l'azione ha portato la battaglia alla vittoria
      */
     public RisultatoAzione usaAbilita() { return esegui(Battaglia::usaAbilitaEroe); }
     /**
@@ -174,11 +185,10 @@ public final class ServizioGioco {
     }
 
     /**
-     * Registra la vittoria corrente una sola volta; un errore di persistenza consente un successivo tentativo.
+     * Registra la vittoria corrente una sola volta. In caso di errore di persistenza, consente di ritentare.
      *
      * @throws IllegalStateException se manca una partita o un salvataggio utilizzabile, oppure la battaglia non è
      *     stata vinta
-     * @throws IllegalStateException se manca una partita attiva o il suo stato non consente il comando
      * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se l’accesso al
      *     salvataggio non riesce
      */
@@ -197,6 +207,8 @@ public final class ServizioGioco {
      * Salva la vittoria corrente e avanza nella campagna, completandola se si trova all’ultimo castello.
      *
      * @throws IllegalStateException se manca una partita attiva o il suo stato non consente il comando
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se il salvataggio della vittoria
+     *     non riesce
      */
     public void vaiAlCastelloSuccessivo() {
         salvaVittoria();

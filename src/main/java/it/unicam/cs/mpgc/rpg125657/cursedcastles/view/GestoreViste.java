@@ -78,8 +78,7 @@ public final class GestoreViste {
      * @param fxml nome della risorsa FXML da caricare
      * @param controller istanza da associare al controller dichiarato nel file FXML
      * @return controller associato alla schermata caricata
-     * @throws IllegalArgumentException se il controller non è compatibile con il tipo dichiarato nel file FXML
-     * @throws IllegalStateException se il caricamento FXML non riesce
+     * @throws IllegalStateException se il caricamento FXML fallisce, anche per un controller incompatibile
      */
     public <T> T mostra(String fxml, T controller) {
         FXMLLoader loader = new FXMLLoader(risorsa(fxml));

@@ -10,7 +10,9 @@ import java.util.Objects;
 
 /**
  * Rappresenta l’aggregato di combattimento di un castello.
- * Dopo ogni azione riuscita dell'eroe risponde un solo nemico ancora vivo.
+ * Dopo un'azione riuscita dell'eroe risponde il bersaglio, se è ancora vivo.
+ * Se il bersaglio è stato sconfitto o l'azione non richiedeva un bersaglio, risponde il primo nemico vivo.
+ * Se tutti i nemici sono sconfitti, la battaglia termina con una vittoria.
  */
 @Accessors(fluent = true)
 public final class Battaglia {

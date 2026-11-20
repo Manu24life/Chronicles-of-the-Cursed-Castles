@@ -61,27 +61,35 @@ public final class BattagliaController {
      * @param indiceNemico indice del nemico nella lista originale, a partire da zero
      * @return esito del comando insieme allo snapshot aggiornato della partita
      * @throws IllegalStateException se manca una partita attiva o il suo stato non consente il comando
+     * @throws IllegalArgumentException se l'indice non identifica un nemico vivo
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se il salvataggio fallisce dopo che
+     *     l'azione ha portato la battaglia alla vittoria
      */
     public EsitoComando attacca(int indiceNemico) {
         return new EsitoComando(gioco.attacca(indiceNemico), stato());
     }
 
     /**
-     * Attiva l’abilità dell’eroe secondo i requisiti del bersaglio.
+     * Attiva l'abilità dell'eroe, usando l'indice solo se serve un bersaglio.
      *
      * @param indiceNemico indice del nemico nella lista originale, a partire da zero
      * @return esito del comando insieme allo snapshot aggiornato della partita
      * @throws IllegalStateException se manca una partita attiva o il suo stato non consente il comando
+     * @throws IllegalArgumentException se l'abilità richiede un bersaglio e l'indice non identifica un nemico vivo
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se il salvataggio fallisce dopo che
+     *     l'azione ha portato la battaglia alla vittoria
      */
     public EsitoComando usaAbilita(int indiceNemico) {
         return new EsitoComando(gioco.usaAbilita(indiceNemico), stato());
     }
 
     /**
-     * Attiva l’abilità dell’eroe secondo i requisiti del bersaglio.
+     * Attiva l'abilità dell'eroe senza selezionare un bersaglio. Restituisce un fallimento se serve un nemico.
      *
      * @return esito del comando insieme allo snapshot aggiornato della partita
      * @throws IllegalStateException se manca una partita attiva o il suo stato non consente il comando
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se il salvataggio fallisce dopo che
+     *     l'azione ha portato la battaglia alla vittoria
      */
     public EsitoComando usaAbilita() {
         return new EsitoComando(gioco.usaAbilita(), stato());
@@ -108,10 +116,13 @@ public final class BattagliaController {
     }
 
     /**
-     * Registra la vittoria corrente una sola volta; un errore di persistenza consente un successivo tentativo.
+     * Registra la vittoria corrente una sola volta. In caso di errore di persistenza, consente di ritentare.
      *
      * @return snapshot aggiornato dopo il salvataggio
-     * @throws IllegalStateException se manca una partita attiva o il suo stato non consente il comando
+     * @throws IllegalStateException se manca una partita o un salvataggio utilizzabile, oppure la battaglia non è
+     *     stata vinta
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se il salvataggio della vittoria
+     *     non riesce
      */
     public VistaPartita salvaVittoria() {
         gioco.salvaVittoria();
@@ -123,6 +134,8 @@ public final class BattagliaController {
      *
      * @return snapshot del nuovo castello o della campagna completata
      * @throws IllegalStateException se manca una partita attiva o il suo stato non consente il comando
+     * @throws it.unicam.cs.mpgc.rpg125657.cursedcastles.persistence.EccezionePersistenza se il salvataggio della vittoria
+     *     non riesce
      */
     public VistaPartita vaiAlCastelloSuccessivo() {
         gioco.vaiAlCastelloSuccessivo();

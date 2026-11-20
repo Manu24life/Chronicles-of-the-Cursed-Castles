@@ -7,7 +7,8 @@ import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.eroe.Eroe;
 import it.unicam.cs.mpgc.rpg125657.cursedcastles.model.personaggio.ModificatoreStatistiche;
 
 /**
- * Applica bonus permanenti e additivi del 15% all'attacco e del 40% alla difesa.
+ * Aggiunge a ogni utilizzo un bonus del 15% all'attacco e del 40% alla difesa.
+ * I bonus si sommano e vengono azzerati all'ingresso nel castello successivo.
  */
 public final class TempraDelCavaliere extends AbilitaConRicarica {
 
