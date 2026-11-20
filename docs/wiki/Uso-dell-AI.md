@@ -6,7 +6,7 @@ La progettazione del gioco è partita dalle regole e dalle meccaniche che volevo
 
 ## Supporto di Codex (GPT-6.1 Sol)
 
-Codex mi ha affiancato nella scrittura dei costruttori e dei test automatizzati, oltre che nel miglioramento dell'interfaccia grafica. La grafica seppur facoltativa per la consegna e mi  ci sono dedicato a migliorarla per interesse personale. Codex mi è servito anche per velocizzare il lavoro sulla documentazione, dalla stesura di una Javadoc dettagliata a partire dai miei commenti all'organizzazione e all'aggiornamento delle pagine della wiki. [Interfaccia Grafica](Interfaccia-Grafica)
+Codex mi ha affiancato nella scrittura dei costruttori e dei test automatizzati, oltre che nel miglioramento dell'interfaccia grafica. La grafica seppur facoltativa per la consegna, mi  ci sono dedicato a migliorarla per interesse personale. Codex mi è servito anche per velocizzare il lavoro sulla documentazione, dalla stesura di una Javadoc dettagliata a partire dai miei commenti all'organizzazione e all'aggiornamento delle pagine della wiki. [Interfaccia Grafica](Interfaccia-Grafica)
 
 Per evitare di copiare a mano le pagine a ogni aggiornamento, ho realizzato con Codex lo script PowerShell `Publish-Wiki.ps1`. Lo avvio manualmente e lo script copia i file Markdown di `docs/wiki` in una copia locale della wiki GitHub, poi mostra un riepilogo delle modifiche. Quando voglio pubblicarle, lo eseguo con l'opzione `-Publish`, che effettua il commit e il push se ci sono davvero delle differenze. [Script di pubblicazione](https://github.com/Manu24life/Chronicles-of-the-Cursed-Castles/blob/main/scripts/Publish-Wiki.ps1)
 
