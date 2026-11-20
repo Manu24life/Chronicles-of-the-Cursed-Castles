@@ -121,8 +121,7 @@ anteprime PNG in `build/reports/ui`, anche alla risoluzione minima e per i tre c
 Ho definito l'architettura, le regole del gioco e le scelte tecniche del progetto. Con
 **Codex (GPT-6.1 Sol)** mi sono aiutato per il supporto di costruttori, test, grafica, documentazione e soprattutto
 per il debug della persistenza. Infine ho usato **Claude Sonnet 5.5** per un secondo controllo della qualità
-del codice. Ho revisionato personalmente tutti i contenuti prodotti dall'IA prima di integrare
-quelli utili al progetto.
+del codice. L'uso dell'IA è stato fatto in maniera consapevole e tutti i miglioramenti e le feature prodotte sono state revisionate personalmente.
 
 Per maggiori dettagli, consultare la pagina [Uso dell'IA nella wiki](docs/wiki/Uso-dell-AI.md).
 
